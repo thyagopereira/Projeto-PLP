@@ -18,7 +18,7 @@ __Desenvolvedores__
 
 - [Thyago Pereira](https://github.com/thyagopereira)
 - [Victor Virgolino](https://github.com/VictorVirgolino)
-- [JOnathan Lucas]()
+- [Jonathan Lucas]()
 - [Alex Rodrigues]()
 #
 
