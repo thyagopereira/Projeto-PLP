@@ -30,4 +30,4 @@ __Desenvolvedores__
 
 
 __Professora/ Orientadora do projeto__
-- [Melina Mongiovi] (https://github.com/melmongiovi)
+- [Melina Mongiovi](https://github.com/melmongiovi)
