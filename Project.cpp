@@ -19,51 +19,6 @@ using namespace std;
     "using namespace std"
 */ 
 
-struct data
-{
-    int dia;
-    int mes;
-};
-
-
-struct AnuncioEncontrado
-{   
-    string local;
-    struct data data; 
-    string quemEncontrou;
-    string nomePertence;
-    string descricaoObjeto;
-    
-};
-
-
-struct AnuncioPerdido
-{
-    string ondeEsqueceu;
-    struct data quandoPerdeu; 
-    string dono;
-    string nomePertence;
-    string descricaoObjeto;
-
-};
-
-void showDate(struct data date){
-
-    cout << date.dia << "/" << date.mes <<  endl;
-    
-}
-
-
-struct data  criaData(int dia , int mes){
-    struct data date ;
-    // Pode melhorar metodo de verificação ;  
-    if( (dia > 0 ) && (dia < 31 ) && ( mes > 0) && (mes <= 12) ){
-            date.dia  = dia;
-            date.mes  = mes;
-    }   
-        return date ;
-} ;
-
 
 // O uso da Main é voltado a Ideia de um facade / Controller  ; 
 
