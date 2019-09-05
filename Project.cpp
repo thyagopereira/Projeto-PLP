@@ -17,6 +17,9 @@ using namespace std;
 
     Tais comandos so funcionam perante a compilação inicial do comando  
     "using namespace std"
+
+    Alterando apenas para commit de teste, so fiz retirar o github do Alex lá no Readme 
+    até pq ele desistiu da cadeira né
 */ 
 
 struct data
