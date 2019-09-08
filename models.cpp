@@ -7,29 +7,26 @@ struct data
     int mes;
 };
 
-
-
-
-
 struct AnuncioEncontrado
-{   
+{
     string local;
-    struct data data; 
+    struct data data;
     string quemEncontrou;
     string nomePertence;
     string descricaoObjeto;
     string categoria;
 
-    
+
 };
 
 
 struct AnuncioPerdido
 {
     string ondeEsqueceu;
-    struct data quandoPerdeu; 
+    struct data quandoPerdeu;
     string dono;
     string nomePertence;
     string descricaoObjeto;
+    string categoria ; 
 
 };
