@@ -200,7 +200,7 @@ void cadastraAchados(struct AnuncioEncontrado encontrados[] , int encontradosInd
       encontrados[encontradosIndex] = criaAchados();
 }
 
-void popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct AnuncioEncontrado encontrados[], int  encontradosIndex){
+int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct AnuncioEncontrado encontrados[], int  encontradosIndex){
     
     srand( time(NULL));
 
@@ -216,8 +216,16 @@ void popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct
     struct AnuncioPerdido itemPerdido;
     struct AnuncioEncontrado itemEncontrado;
 
+    int quant;
+
+    /*Define a quantidades de elementos que serão gerados e adicionados a database*/
+    cout << "  " << endl;
+    cout << "Digite o numero de elementos a serem adicionados:" << endl;
+    cin >> quant;
+    cout << "  " << endl;
+
     /*Cadastrando Perdidos Aleatoriamente*/
-    for (int i = 0; i < 10; ++i){
+    for (int i = perdidosIndex; i < quant; ++i){
         
         /*Seleciona um número aleatório*/
         randNomes = rand() % 10; /*0 - 10*/
@@ -239,7 +247,7 @@ void popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct
     }
 
     /*Cadastrando Encontrados Aleatoriamente*/
-    for (int i = 0; i < 10; ++i){
+    for (int i = encontradosIndex; i < quant; ++i){
         
         /*Seleciona um número aleatório*/
         randNomes = rand() % 10; /*0 - 10*/
@@ -261,10 +269,11 @@ void popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct
 
     /*Impressões de Confimação*/
     cout << " " << endl;
-    cout << "10 ItensPerdidos foram cadastrados." << endl;
-    cout << "10 ItensEncontrados foram cadastrados." << endl;
+    cout<< quant << " ItensPerdidos foram cadastrados." << endl;
+    cout<< quant << " ItensEncontrados foram cadastrados." << endl;
     cout << " " << endl;
 
+    return quant;
 
 }
 
@@ -281,7 +290,7 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
 
      cout << "Escolha a opção:" << endl ;
      cout << "1-Cadastro de objetos perdidos" << endl ;
-     cout << "2-Cadastro de objetos achados" << endl ;
+     cout << "2-Cadastro de objetos encontrados" << endl ;
      cout << "3-Lista de encontrados"<< endl ;
      cout << "4-Lista de perdidos"<< endl ;
      cout << "5-Lista de encontrados por categoria"<<endl;
@@ -339,10 +348,11 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
            //  buscaQuemPerdeu();
              break;
      case 10:
-             popularDatabase(perdidos, *perdidosIndex, encontrados, *encontradosIndex);
-             /*Incrementa os Indicices dos Arrays em 10*/
-             (*encontradosIndex) += 10;
-             (*perdidosIndex) += 10;
+             int quant;
+             quant = popularDatabase(perdidos, *perdidosIndex, encontrados, *encontradosIndex);
+             /*Incrementa os Indicices dos Arrays pelo numero de elementos adicionados*/
+             (*perdidosIndex) += quant;
+             (*encontradosIndex) += quant;
              break;
      default:
              cout << "Operação inválida" << endl;
