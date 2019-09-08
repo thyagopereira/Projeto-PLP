@@ -28,6 +28,7 @@ void showDate(struct data date){
 
 // O uso da Main é voltado a Ideia de um facade / Controller  ;
 
+
 int main(){
         setlocale(LC_ALL, "Portuguese");
         int sizeofVector = 1000;
