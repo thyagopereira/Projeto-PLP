@@ -269,8 +269,8 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
 
     /*Impressões de Confimação*/
     cout << " " << endl;
-    cout<< quant << " ItensPerdidos foram cadastrados." << endl;
-    cout<< quant << " ItensEncontrados foram cadastrados." << endl;
+    cout<< quant << " Itens Perdidos foram cadastrados." << endl;
+    cout<< quant << " Itens Encontrados foram cadastrados." << endl;
     cout << " " << endl;
 
     return quant;
