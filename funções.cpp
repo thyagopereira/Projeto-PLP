@@ -193,6 +193,76 @@ void listarPerdidosCategoria(struct AnuncioPerdido perdidos[], int sizeofVector)
 
 }
 
+void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector){
+      string nomeDeQuemEncontrou;
+
+      /*Recebe o nome de Quem encontrou*/
+      cout << "  " << endl ;
+      cout << "Digite o nome de quem encontrou:" << endl;
+      ws(cin);
+      getline(cin, nomeDeQuemEncontrou);
+
+      cout << "  " << endl ;
+      cout << "Lista de Itens Encontrados por alguém com esse nome: " << nomeDeQuemEncontrou << ": " << endl ;
+      cout << "  " << endl ;
+
+      for(int i = 0 ; i < sizeofVector ; i++){
+
+            /*Verifica se o nome de quem encontrou é igual ao fornecido pelo usuario*/
+            if(encontrados[i].categoria.compare(nomeDeQuemEncontrou) == 0){
+                toStringAchado(encontrados[i]);
+            }
+      }      
+
+}
+
+void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
+      string nomeDeQuemPerdeu;
+
+      /*Recebe o nome de Quem Perdeu*/
+      cout << "  " << endl ;
+      cout << "Digite o nome de quem Perdeu:" << endl;
+      ws(cin);
+      getline(cin, nomeDeQuemPerdeu);
+
+      cout << "  " << endl ;
+      cout << "Lista de Itens Perdidos por alguém com esse nome: " << nomeDeQuemPerdeu << ": " << endl ;
+      cout << "  " << endl ;
+
+      for(int i = 0 ; i < sizeofVector ; i++){
+
+            /*Verifica se o nome de quem perdeu é igual ao fornecido pelo usuario*/
+            if(perdidos[i].categoria.compare(nomeDeQuemPerdeu) == 0){
+                toStringPerdido(perdidos[i]);
+            }
+      }      
+
+}
+
+
+void buscaObjetoPeloNome(struct AnuncioPerdido perdidos[], int sizeofVector){
+      string nome;
+
+      /*Recebe o nome do Objeto procurado*/
+      cout << "  " << endl ;
+      cout << "Digite o nome do Objeto:" << endl;
+      ws(cin);
+      getline(cin, nome);
+
+      cout << "  " << endl ;
+      cout << "Lista de itens com esse nome: " << nome << ": " << endl ;
+      cout << "  " << endl ;
+
+      for(int i = 0 ; i < sizeofVector ; i++){
+
+            /*Verifica se o nome do item é igual ao fornecido pelo usuario*/
+            if(perdidos[i].nomePertence.compare(nome) == 0){
+                toStringPerdido(perdidos[i]);
+            }
+      }      
+
+}
+
 
 void cadastraPerdidos(struct AnuncioPerdido perdidos[] , int perdidosIndex, int sizeofVector){
       perdidos[perdidosIndex] = criaPerdidos();
@@ -341,13 +411,13 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
              listarPerdidosCategoria(perdidos, *perdidosIndex);
              break;
      case 7 :
-           //  buscaNome();
+             buscaObjetoPeloNome(perdidos, *perdidosIndex);
              break;
      case 8 :
-         //   buscaQuemEncontrou();
+             buscaQuemEncontrou(encontrados, *perdidosIndex);
             break;
      case 9 :
-           //  buscaQuemPerdeu();
+             buscaQuemPerdeu(perdidos, *perdidosIndex);
              break;
      case 10:
              int quant;
