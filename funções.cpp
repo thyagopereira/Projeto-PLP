@@ -296,6 +296,16 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
     cin >> quant;
     cout << "  " << endl;
 
+    /*Testando se o numero passado pelo usuario é maior que 0*/
+    while(quant < 1){
+      cout << "  " << endl;
+      cout << "Número Inválido, Digite um número inteiro positivo maior que 0: " << endl;
+      cout << " " << endl;
+      cout << "Digite o número de elementos a serem adicionados:" << endl;
+      cin >> quant;
+      cout << "  " << endl;
+    }
+
     /*Cadastrando Perdidos Aleatoriamente*/
     for (int i = perdidosIndex; i < quant; ++i){
         
