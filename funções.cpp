@@ -209,7 +209,7 @@ void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se o nome de quem encontrou é igual ao fornecido pelo usuario*/
-            if(encontrados[i].categoria.compare(nomeDeQuemEncontrou) == 0){
+            if(encontrados[i].quemEncontrou.compare(nomeDeQuemEncontrou) == 0){
                 toStringAchado(encontrados[i]);
             }
       }      
@@ -232,7 +232,7 @@ void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se o nome de quem perdeu é igual ao fornecido pelo usuario*/
-            if(perdidos[i].categoria.compare(nomeDeQuemPerdeu) == 0){
+            if(perdidos[i].dono.compare(nomeDeQuemPerdeu) == 0){
                 toStringPerdido(perdidos[i]);
             }
       }      
