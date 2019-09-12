@@ -124,26 +124,42 @@ void toStringAchado(struct AnuncioEncontrado encontrado){
 }
 
 void listarAchados(struct AnuncioEncontrado encontrados[] , int sizeofVector ){
-    
 
-    cout << "  " << endl ;
-    cout << "Lista de Itens Encontrados: " << endl ;
-    cout << "  " << endl ;
+    if(sizeofVector == 0){
+        cout << "  " << endl ;
+        cout << "A Lista de Itens Encontrados está vazia. " << endl ;
+        cout << "  " << endl ;
+    }
+    else{
 
-    for(int i = 0 ; i < sizeofVector ; i++){
+      cout << "  " << endl ;
+      cout << "Lista de Itens Encontrados: " << endl ;
+      cout << "  " << endl ;
+
+      for(int i = 0 ; i < sizeofVector ; i++){
             toStringAchado(encontrados[i]);
+      }
     }
 }
 
 void listarPerdidos(struct AnuncioPerdido perdidos[] , int sizeofVector){
-      
-      cout << "  " << endl ;
-      cout << "Lista de Itens Perdidos: " << endl ;
-      cout << "  " << endl ;
 
-      for(int i = 0; i < sizeofVector ; i++){
-            toStringPerdido(perdidos[i]);
+      if(sizeofVector == 0){
+        cout << "  " << endl ;
+        cout << "A Lista de Itens Perdidos está vazia. " << endl ;
+        cout << "  " << endl ;
       }
+      else{
+
+        cout << "  " << endl ;
+        cout << "Lista de Itens Perdidos: " << endl ;
+        cout << "  " << endl ;
+
+        for(int i = 0; i < sizeofVector ; i++){
+            toStringPerdido(perdidos[i]);
+        }
+      }
+      
 
 }
 
@@ -156,17 +172,34 @@ void listarAchadosCategoria(struct AnuncioEncontrado encontrados[], int sizeofVe
       ws(cin);
       getline(cin, categoria);
 
-      cout << "  " << endl ;
-      cout << "Lista de Itens Perdidos da Categoria " << categoria << ": " << endl ;
-      cout << "  " << endl ;
+      struct AnuncioEncontrado reposta[sizeofVector];
+      int tam = 0;
 
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se a categoria do item é igual a fornecida pelo usuario*/
             if(encontrados[i].categoria.compare(categoria) == 0){
-                toStringAchado(encontrados[i]);
+                reposta[tam] = encontrados[i];
+                tam++;
             }
-      }      
+      }
+
+      if(tam == 0){
+        
+        cout << "  " << endl ;
+        cout << "Não existem Itens Encontrados dessa Categoria. " << endl ;
+        cout << "  " << endl ;
+      }
+      else{
+
+        cout << "  " << endl ;
+        cout << "Lista de Itens Encontrados da Categoria " << categoria << ": " << endl ;
+        cout << "  " << endl ;
+
+        for (int j = 0; j < tam; ++j){
+         toStringAchado(reposta[j]);
+        }
+      }
 
 }
 
@@ -183,13 +216,34 @@ void listarPerdidosCategoria(struct AnuncioPerdido perdidos[], int sizeofVector)
       cout << "Lista de Itens Encontrados da Categoria " << categoria << ": " << endl ;
       cout << "  " << endl ;
 
+      struct AnuncioPerdido reposta[sizeofVector];
+      int tam = 0;
+
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se a categoria do item é igual a fornecida pelo usuario*/
             if(perdidos[i].categoria.compare(categoria) == 0){
-                toStringPerdido(perdidos[i]);
+                reposta[tam] = perdidos[i];
+                tam++;
             }
-      }      
+      }
+
+      if(tam == 0){
+        
+        cout << "  " << endl ;
+        cout << "Não existem Itens Perdidos dessa Categoria. " << endl ;
+        cout << "  " << endl ;
+      }
+      else{
+
+        cout << "  " << endl ;
+        cout << "Lista de Itens Perdidos da Categoria " << categoria << ": " << endl ;
+        cout << "  " << endl ;
+
+        for (int j = 0; j < tam; ++j){
+         toStringPerdido(reposta[j]);
+        }
+      }    
 
 }
 
