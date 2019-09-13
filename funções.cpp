@@ -159,7 +159,7 @@ void listarPerdidos(struct AnuncioPerdido perdidos[] , int sizeofVector){
             toStringPerdido(perdidos[i]);
         }
       }
-      
+
 
 }
 
@@ -185,7 +185,7 @@ void listarAchadosCategoria(struct AnuncioEncontrado encontrados[], int sizeofVe
       }
 
       if(tam == 0){
-        
+
         cout << "  " << endl ;
         cout << "Não existem Itens Encontrados dessa Categoria. " << endl ;
         cout << "  " << endl ;
@@ -229,7 +229,7 @@ void listarPerdidosCategoria(struct AnuncioPerdido perdidos[], int sizeofVector)
       }
 
       if(tam == 0){
-        
+
         cout << "  " << endl ;
         cout << "Não existem Itens Perdidos dessa Categoria. " << endl ;
         cout << "  " << endl ;
@@ -243,7 +243,7 @@ void listarPerdidosCategoria(struct AnuncioPerdido perdidos[], int sizeofVector)
         for (int j = 0; j < tam; ++j){
          toStringPerdido(reposta[j]);
         }
-      }    
+      }
 
 }
 
@@ -268,7 +268,7 @@ void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector
             }
       }
       if(tam == 0){
-        
+
         cout << "  " << endl ;
         cout << "Ninguém com esse nome cadastrou um objeto encontrado." << endl ;
         cout << "  " << endl ;
@@ -282,7 +282,7 @@ void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector
         for (int j = 0; j < tam; ++j){
            toStringAchado(reposta[j]);
         }
-      } 
+      }
 
 }
 
@@ -295,10 +295,10 @@ void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
       ws(cin);
       getline(cin, nomeDeQuemPerdeu);
 
-      
+
       struct AnuncioPerdido reposta[sizeofVector];
       int tam = 0;
-      
+
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se o nome de quem perdeu é igual ao fornecido pelo usuario*/
@@ -308,7 +308,7 @@ void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
             }
       }
       if(tam == 0){
-        
+
         cout << "  " << endl ;
         cout << "Ninguém com esse nome cadastrou um objeto perdido." << endl ;
         cout << "  " << endl ;
@@ -348,7 +348,7 @@ void buscaObjetoPeloNome(struct AnuncioPerdido perdidos[], int sizeofVector){
             }
       }
       if(tam == 0){
-        
+
         cout << "  " << endl ;
         cout << "Não existem objetos com esse nome." << endl ;
         cout << "  " << endl ;
@@ -362,47 +362,47 @@ void buscaObjetoPeloNome(struct AnuncioPerdido perdidos[], int sizeofVector){
             for (int j = 0; j < tam; ++j){
              toStringPerdido(reposta[j]);
             }
-      }   
+      }
 
 }
 
-void  objetoPerdidoDevolvido(struct AnuncioPerdido perdidos[], int sizeofVector){
+/**void  objetoPerdidoDevolvido(struct AnuncioPerdido perdidos[], int sizeofVector){
       string nomeDeQuemPerdeu;
 
      /*Recebe o nome de Quem Perdeu*/
-      cout << "  " << endl ;
+    /*  cout << "  " << endl ;
       cout << "Digite o nome de quem Perdeu:" << endl;
       ws(cin);
       getline(cin, nomeDeQuemPerdeu);
 
             for(int i = 0 ; i < sizeofVector ; i++){
             /*Verifica se o nome de quem encontrou e igual o fornecido*/
-            if(perdidos[i].nomePertence.compare(nomeDeQuemPerdeu) == 0){
+      /*      if(perdidos[i].nomePertence.compare(nomeDeQuemPerdeu) == 0){
                   perdidos[i].descricaoObjeto == "ESTE OBJETO FOI DEVOLVIDO";
-                  perdidos[i].categoria == "Devolvido"; 
+                  perdidos[i].categoria == "Devolvido";
             }
       }
       cout << "Este pertence foi devidamente devolvido ao dono." << endl;
-}
+}*/
 
-void  objetoAchadoDevolvido(struct AnuncioEncontrado encontrados[], int sizeofVector){
+/*void  objetoAchadoDevolvido(struct AnuncioEncontrado encontrados[], int sizeofVector){
       string nomeDeQuemEncontrou;
-      
-      /*Recebe o nome de Quem Encontrou*/
-      cout << "  " << endl ;
-      cout << "Digite o nome de quem Encontrou:" << endl;
-      ws(cin);
-      getline(cin, nomeDeQuemEncontrou);
-      
-      for(int i = 0 ; i < sizeofVector ; i++){
-            /*Verifica se o nome de quem encontrou e igual o fornecido*/
-            if(encontrados[i].nomePertence.compare(nomeDeQuemEncontrou) == 0){
-                  encontrados[i].descricaoObjeto == "ESTE OBJETO FOI DEVOLVIDO";
-                  encontrados[i].categoria == "Devolvido";
-            }
-      }
-      cout << "O pertence foi devidamente devolvido ao dono." << endl;
-}
+
+//       Recebe o nome de Quem Encontrou*/
+//       cout << "  " << endl ;
+//       cout << "Digite o nome de quem Encontrou:" << endl;
+//       ws(cin);
+//       getline(cin, nomeDeQuemEncontrou);
+//
+//       for(int i = 0 ; i < sizeofVector ; i++){
+//             /*Verifica se o nome de quem encontrou e igual o fornecido*/
+//             if(encontrados[i].nomePertence.compare(nomeDeQuemEncontrou) == 0){
+//                   encontrados[i].descricaoObjeto == "ESTE OBJETO FOI DEVOLVIDO";
+//                   encontrados[i].categoria == "Devolvido";
+//             }
+//       }
+//       cout << "O pertence foi devidamente devolvido ao dono." << endl;
+// }
 
 
 void cadastraPerdidos(struct AnuncioPerdido perdidos[] , int perdidosIndex, int sizeofVector){
@@ -414,7 +414,7 @@ void cadastraAchados(struct AnuncioEncontrado encontrados[] , int encontradosInd
 }
 
 int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct AnuncioEncontrado encontrados[], int  encontradosIndex){
-    
+
     srand( time(NULL));
 
     /*Posiveis valores que serão selecionados aleatoriamente*/
@@ -449,7 +449,7 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
 
     /*Cadastrando Perdidos Aleatoriamente*/
     for (int i = perdidosIndex; i < quant; ++i){
-        
+
         /*Seleciona um número aleatório*/
         randNomes = rand() % 10; /*0 - 10*/
         randLocais = rand() % 10; /*0 - 10*/
@@ -464,14 +464,14 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
         itemPerdido.nomePertence = categorias[randCategorias];
         itemPerdido.descricaoObjeto = descricoes[randDescricoes];
         itemPerdido.categoria = categorias[randCategorias];
-        
+
         perdidos[i] = itemPerdido;
 
     }
 
     /*Cadastrando Encontrados Aleatoriamente*/
     for (int i = encontradosIndex; i < quant; ++i){
-        
+
         /*Seleciona um número aleatório*/
         randNomes = rand() % 10; /*0 - 10*/
         randLocais = rand() % 10; /*0 - 10*/
@@ -486,7 +486,7 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
         itemEncontrado.nomePertence = categorias[randCategorias];
         itemEncontrado.descricaoObjeto = descricoes[randDescricoes];
         itemEncontrado.categoria = categorias[randCategorias];
-        
+
         encontrados[i] = itemEncontrado;
     }
 
@@ -521,9 +521,9 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
      cout << "7-Busca por nome"<< endl ;
      cout << "8-Busca por pessoa que Encontrou"<< endl;
      cout << "9-Busca por pessoa que perdeu"<< endl ;
-     cout << "10-Popular DataBase" << endl; 
-     cout << "11-Objeto perdido devolvido" << endl; 
-     cout << "12-Objeto encontrado devolvido" << endl; 
+     cout << "10-Popular DataBase" << endl;
+     cout << "11-Objeto perdido devolvido" << endl;
+     cout << "12-Objeto encontrado devolvido" << endl;
      cout << "Digite  0  para sair do sistema e encerrar todas as operações" << endl ;
      cout << "Digite sua opção ............"<< "\n"<< endl ;
 
@@ -582,7 +582,7 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
       case 11:
             objetoPerdidoDevolvido(perdidos, *perdidosIndex);
             break;
-      case 12: 
+      case 12:
             objetoAchadoDevolvido(encontrados, *encontradosIndex);
      default:
              cout << "Operação inválida" << endl;
