@@ -18,7 +18,14 @@ Introdução: O projeto visa facilitar o processo de achados e perdidos no curso
 
 7- È possivel listar objetos por categoria ,( eletrônicos , vestimentas e material  didático );
 
-8- È possivel buscar um objeto perdido , por meio do nome deste ;
+8- É possivel buscar um objeto perdido , por meio do nome deste ;
+
+9- É possível popular a base de dados para averiguar as funcionalidades;
+
+10-É possível alterar a categoria dos objetos achados para Devolvidos;
+
+11-É possível alterar a categoria dos objetos perdidos para Devolvidos;
+
 
 __Desenvolvedores__
 
