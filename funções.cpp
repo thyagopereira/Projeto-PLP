@@ -256,10 +256,6 @@ void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector
       ws(cin);
       getline(cin, nomeDeQuemEncontrou);
 
-      cout << "  " << endl ;
-      cout << "Lista de Itens Encontrados por alguém com esse nome: " << nomeDeQuemEncontrou << ": " << endl ;
-      cout << "  " << endl ;
-
       struct AnuncioEncontrado reposta[sizeofVector];
       int tam = 0;
 
@@ -277,10 +273,15 @@ void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector
         cout << "Ninguém com esse nome cadastrou um objeto encontrado." << endl ;
         cout << "  " << endl ;
       }
-      else{     
-            for (int j = 0; j < tam; ++j){
-             toStringAchado(reposta[j]);
-      }
+      else{
+
+        cout << "  " << endl ;
+        cout << "Lista de Itens Encontrados por alguém com esse nome: " << nomeDeQuemEncontrou << ": " << endl ;
+        cout << "  " << endl ;
+
+        for (int j = 0; j < tam; ++j){
+           toStringAchado(reposta[j]);
+        }
       } 
 
 }
@@ -293,10 +294,6 @@ void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
       cout << "Digite o nome de quem Perdeu:" << endl;
       ws(cin);
       getline(cin, nomeDeQuemPerdeu);
-
-      cout << "  " << endl ;
-      cout << "Lista de Itens Perdidos por alguém com esse nome: " << nomeDeQuemPerdeu << ": " << endl ;
-      cout << "  " << endl ;
 
       
       struct AnuncioPerdido reposta[sizeofVector];
@@ -316,10 +313,15 @@ void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
         cout << "Ninguém com esse nome cadastrou um objeto perdido." << endl ;
         cout << "  " << endl ;
       }
-      else{     
-            for (int j = 0; j < tam; ++j){
+      else{
+
+          cout << "  " << endl ;
+          cout << "Lista de Itens Perdidos por alguém com esse nome: " << nomeDeQuemPerdeu << ": " << endl ;
+          cout << "  " << endl ;
+
+          for (int j = 0; j < tam; ++j){
              toStringPerdido(reposta[j]);
-      }
+          }
       }
 
 }
@@ -333,10 +335,6 @@ void buscaObjetoPeloNome(struct AnuncioPerdido perdidos[], int sizeofVector){
       cout << "Digite o nome do Objeto:" << endl;
       ws(cin);
       getline(cin, nome);
-
-      cout << "  " << endl ;
-      cout << "Lista de itens com esse nome: " << nome << ": " << endl ;
-      cout << "  " << endl ;
 
       struct AnuncioPerdido reposta[sizeofVector];
       int tam = 0;
@@ -355,10 +353,15 @@ void buscaObjetoPeloNome(struct AnuncioPerdido perdidos[], int sizeofVector){
         cout << "Não existem objetos com esse nome." << endl ;
         cout << "  " << endl ;
       }
-      else{     
+      else{
+
+            cout << "  " << endl ;
+            cout << "Lista de itens com esse nome: " << nome << ": " << endl ;
+            cout << "  " << endl ;
+
             for (int j = 0; j < tam; ++j){
              toStringPerdido(reposta[j]);
-      }
+            }
       }   
 
 }

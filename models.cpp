@@ -30,3 +30,14 @@ struct AnuncioPerdido
     string categoria ; 
 
 };
+
+struct AnuncioDevolvido
+{
+    struct data quandoDevolvido;
+    string dono;
+    string quemEncontrou;
+    string nomePertence;
+    string descricaoObjeto;
+    string categoria; 
+
+};
