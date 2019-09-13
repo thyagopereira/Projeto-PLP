@@ -260,13 +260,28 @@ void buscaQuemEncontrou(struct AnuncioEncontrado encontrados[], int sizeofVector
       cout << "Lista de Itens Encontrados por alguém com esse nome: " << nomeDeQuemEncontrou << ": " << endl ;
       cout << "  " << endl ;
 
+      struct AnuncioEncontrado reposta[sizeofVector];
+      int tam = 0;
+
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se o nome de quem encontrou é igual ao fornecido pelo usuario*/
             if(encontrados[i].quemEncontrou.compare(nomeDeQuemEncontrou) == 0){
-                toStringAchado(encontrados[i]);
+                   reposta[tam] = encontrados[i];
+                   tam++;
             }
-      }      
+      }
+      if(tam == 0){
+        
+        cout << "  " << endl ;
+        cout << "Ninguém com esse nome cadastrou um objeto encontrado." << endl ;
+        cout << "  " << endl ;
+      }
+      else{     
+            for (int j = 0; j < tam; ++j){
+             toStringAchado(reposta[j]);
+      }
+      } 
 
 }
 
@@ -283,13 +298,29 @@ void buscaQuemPerdeu(struct AnuncioPerdido perdidos[], int sizeofVector){
       cout << "Lista de Itens Perdidos por alguém com esse nome: " << nomeDeQuemPerdeu << ": " << endl ;
       cout << "  " << endl ;
 
+      
+      struct AnuncioPerdido reposta[sizeofVector];
+      int tam = 0;
+      
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se o nome de quem perdeu é igual ao fornecido pelo usuario*/
             if(perdidos[i].dono.compare(nomeDeQuemPerdeu) == 0){
-                toStringPerdido(perdidos[i]);
+                   reposta[tam] = perdidos[i];
+                   tam++;
             }
-      }      
+      }
+      if(tam == 0){
+        
+        cout << "  " << endl ;
+        cout << "Ninguém com esse nome cadastrou um objeto perdido." << endl ;
+        cout << "  " << endl ;
+      }
+      else{     
+            for (int j = 0; j < tam; ++j){
+             toStringPerdido(reposta[j]);
+      }
+      }
 
 }
 
@@ -307,14 +338,67 @@ void buscaObjetoPeloNome(struct AnuncioPerdido perdidos[], int sizeofVector){
       cout << "Lista de itens com esse nome: " << nome << ": " << endl ;
       cout << "  " << endl ;
 
+      struct AnuncioPerdido reposta[sizeofVector];
+      int tam = 0;
+
       for(int i = 0 ; i < sizeofVector ; i++){
 
             /*Verifica se o nome do item é igual ao fornecido pelo usuario*/
             if(perdidos[i].nomePertence.compare(nome) == 0){
-                toStringPerdido(perdidos[i]);
+                   reposta[tam] = perdidos[i];
+                   tam++;
             }
-      }      
+      }
+      if(tam == 0){
+        
+        cout << "  " << endl ;
+        cout << "Não existem objetos com esse nome." << endl ;
+        cout << "  " << endl ;
+      }
+      else{     
+            for (int j = 0; j < tam; ++j){
+             toStringPerdido(reposta[j]);
+      }
+      }   
 
+}
+
+void  objetoPerdidoDevolvido(struct AnuncioPerdido perdidos[], int sizeofVector){
+      string nomeDeQuemPerdeu;
+
+     /*Recebe o nome de Quem Perdeu*/
+      cout << "  " << endl ;
+      cout << "Digite o nome de quem Perdeu:" << endl;
+      ws(cin);
+      getline(cin, nomeDeQuemPerdeu);
+
+            for(int i = 0 ; i < sizeofVector ; i++){
+            /*Verifica se o nome de quem encontrou e igual o fornecido*/
+            if(perdidos[i].nomePertence.compare(nomeDeQuemPerdeu) == 0){
+                  perdidos[i].descricaoObjeto == "ESTE OBJETO FOI DEVOLVIDO";
+                  perdidos[i].categoria == "Devolvido"; 
+            }
+      }
+      cout << "Este pertence foi devidamente devolvido ao dono." << endl;
+}
+
+void  objetoAchadoDevolvido(struct AnuncioEncontrado encontrados[], int sizeofVector){
+      string nomeDeQuemEncontrou;
+      
+      /*Recebe o nome de Quem Encontrou*/
+      cout << "  " << endl ;
+      cout << "Digite o nome de quem Encontrou:" << endl;
+      ws(cin);
+      getline(cin, nomeDeQuemEncontrou);
+      
+      for(int i = 0 ; i < sizeofVector ; i++){
+            /*Verifica se o nome de quem encontrou e igual o fornecido*/
+            if(encontrados[i].nomePertence.compare(nomeDeQuemEncontrou) == 0){
+                  encontrados[i].descricaoObjeto == "ESTE OBJETO FOI DEVOLVIDO";
+                  encontrados[i].categoria == "Devolvido";
+            }
+      }
+      cout << "O pertence foi devidamente devolvido ao dono." << endl;
 }
 
 
@@ -435,6 +519,8 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
      cout << "8-Busca por pessoa que Encontrou"<< endl;
      cout << "9-Busca por pessoa que perdeu"<< endl ;
      cout << "10-Popular DataBase" << endl; 
+     cout << "11-Objeto perdido devolvido" << endl; 
+     cout << "12-Objeto encontrado devolvido" << endl; 
      cout << "Digite  0  para sair do sistema e encerrar todas as operações" << endl ;
      cout << "Digite sua opção ............"<< "\n"<< endl ;
 
@@ -490,6 +576,11 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
              (*perdidosIndex) += quant;
              (*encontradosIndex) += quant;
              break;
+      case 11:
+            objetoPerdidoDevolvido(perdidos, *perdidosIndex);
+            break;
+      case 12: 
+            objetoAchadoDevolvido(encontrados, *encontradosIndex);
      default:
              cout << "Operação inválida" << endl;
              cout << "" << endl;
