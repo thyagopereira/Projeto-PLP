@@ -579,11 +579,11 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
              (*perdidosIndex) += quant;
              (*encontradosIndex) += quant;
              break;
-      case 11:
-            objetoPerdidoDevolvido(perdidos, *perdidosIndex);
-            break;
-      case 12:
-            objetoAchadoDevolvido(encontrados, *encontradosIndex);
+      // case 11:
+      //       objetoPerdidoDevolvido(perdidos, *perdidosIndex);
+      //       break;
+      // case 12:
+      //       objetoAchadoDevolvido(encontrados, *encontradosIndex);
      default:
              cout << "Operação inválida" << endl;
              cout << "" << endl;
