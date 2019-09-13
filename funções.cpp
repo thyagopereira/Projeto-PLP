@@ -522,8 +522,8 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
      cout << "8-Busca por pessoa que Encontrou"<< endl;
      cout << "9-Busca por pessoa que perdeu"<< endl ;
      cout << "10-Popular DataBase" << endl;
-     cout << "11-Objeto perdido devolvido" << endl;
-     cout << "12-Objeto encontrado devolvido" << endl;
+     // cout << "11-Objeto perdido devolvido" << endl;
+     // cout << "12-Objeto encontrado devolvido" << endl;
      cout << "Digite  0  para sair do sistema e encerrar todas as operações" << endl ;
      cout << "Digite sua opção ............"<< "\n"<< endl ;
 
@@ -583,7 +583,8 @@ void showMenu(struct AnuncioPerdido perdidos[],int *perdidosIndex ,  struct Anun
       //       objetoPerdidoDevolvido(perdidos, *perdidosIndex);
       //       break;
       // case 12:
-      //       objetoAchadoDevolvido(encontrados, *encontradosIndex);
+      //       objetoAchadoDevolvido(encontrados, *encontradosIndex);lear
+
      default:
              cout << "Operação inválida" << endl;
              cout << "" << endl;
