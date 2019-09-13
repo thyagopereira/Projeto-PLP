@@ -448,7 +448,7 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
     }
 
     /*Cadastrando Perdidos Aleatoriamente*/
-    for (int i = perdidosIndex; i < quant; ++i){
+    for (int i = perdidosIndex; i < (quant+perdidosIndex); ++i){
 
         /*Seleciona um número aleatório*/
         randNomes = rand() % 10; /*0 - 10*/
@@ -470,7 +470,7 @@ int popularDatabase(struct AnuncioPerdido perdidos[], int perdidosIndex, struct 
     }
 
     /*Cadastrando Encontrados Aleatoriamente*/
-    for (int i = encontradosIndex; i < quant; ++i){
+    for (int i = encontradosIndex; i < (quant + perdidosIndex); ++i){
 
         /*Seleciona um número aleatório*/
         randNomes = rand() % 10; /*0 - 10*/
