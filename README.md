@@ -24,8 +24,6 @@ Introdução: O projeto visa facilitar o processo de achados e perdidos no curso
 
 10-É possível alterar a categoria dos objetos achados para Devolvidos;
 
-11-É possível alterar a categoria dos objetos perdidos para Devolvidos;
-
 
 __Desenvolvedores__
 
