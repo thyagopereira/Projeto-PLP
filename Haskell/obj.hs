@@ -1,6 +1,7 @@
 
 import System.Random
 
+--Objeto Achado
 data Achado = Achado
  {
   ondeAchou :: String ,
@@ -11,6 +12,7 @@ data Achado = Achado
   categoria :: String
  }deriving Show
 
+--Objeto Perdido
 data Perdido = Perdido
  {
   ondeEsqueceu :: String ,
@@ -24,23 +26,8 @@ data Perdido = Perdido
 
 main = do
  programa 11 [] []
- -- let bola = Achado {ondeAchou = "LCC2", 
- --                    quandoAchou = "01/01/2019",
- --                    quemAchou = "Victor",
- --                    nomeObjeto = "Bola",
- --                    descricao = "E quadrada",
- --                    categoria = "Brinquedo"
- --                   }
- -- let caneta = Achado {ondeAchou = "LCC3", 
- --                    quandoAchou = "05/01/2019",
- --                    quemAchou = "Ciro",
- --                    nomeObjeto = "Caneta",
- --                    descricao = "E Azul",
- --                    categoria = "Caneta"
- --                   } 
- -- let achados = adicionaAchado (adicionaAchado novo bola) caneta
- -- mapM_ print achados
 
+--Switch de Selecao de Operacao
 programa :: Int -> [Achado] -> [Perdido] ->  IO()
 programa 0 _ _ = do
  putStrLn ""
@@ -74,17 +61,20 @@ programa _ achados perdidos = do
  putStrLn ""
  programa 11 achados perdidos
 
-
+--Operacoes do Programa
 operacoes :: Int -> [Achado] -> [Perdido] -> IO()
 
-
 operacoes 0 achados perdidos = do
+ 
+ -- Sair do Programa
+
  putStrLn ""
  putStrLn "Fim do Programa"
 
 operacoes 1 achados perdidos = do
 
  --Cadastrar Objeto Perdido
+
  putStrLn ""
  putStrLn "Local que Esqueceu:"
  localEsc <- getLine
@@ -105,7 +95,8 @@ operacoes 1 achados perdidos = do
  categoriaEsceu <- getLine
  putStrLn ""
 
- --cria o novo objeto perdido
+ --Criando novo Objeto Perdido
+
  let novoPerdido = Perdido {ondeEsqueceu = localEsc, 
                             quandoEsqueceu = dataEsc,
                             dono = donoEsc,
@@ -118,7 +109,8 @@ operacoes 1 achados perdidos = do
 
 operacoes 2 achados perdidos = do
  
- --Cadastrar Objeto Achado 
+ --Cadastrar Objeto Achado
+
  putStrLn ""
  putStrLn "Local que Encontrou:"
  localEnc <- getLine
@@ -139,7 +131,8 @@ operacoes 2 achados perdidos = do
  categoriaEnc <- getLine
  putStrLn ""
 
- --cria o novo objeto achado
+ --Criando novo Objeto Achado
+
  let novoAchado = Achado {ondeAchou = localEnc, 
                        quandoAchou = dataEnc,
                        quemAchou = nomeQuemEnc,
@@ -151,35 +144,45 @@ operacoes 2 achados perdidos = do
  programa 11 (adicionaAchado achados novoAchado) perdidos
 
 operacoes 3 achados [] = do
- -- Lista dos Objetos Perdidos  Vazia
+
+ -- Lista dos Objetos Perdidos quando Vazia
+
  putStrLn ""
  putStrLn "A Lista de Itens Perdidos esta vazia."
  putStrLn ""
  programa 11 achados []
 
 operacoes 3 achados perdidos = do
+
  -- Lista dos  Objetos Perdidos
+
  putStrLn ""
  putStrLn "A Lista de Itens Perdidos: "
  imprimirPerdidos perdidos
  programa 11 achados perdidos
 
 operacoes 4 [] perdidos = do
- -- Lista dos Objetos Achados Vazia
+
+ -- Lista dos Objetos Achados quando Vazia
+ 
  putStrLn ""
  putStrLn "A Lista de Itens Encontrados esta vazia."
  putStrLn ""
  programa 11 [] perdidos
 
 operacoes 4 achados perdidos= do
+
  -- Lista dos  Objetos Achados
+ 
  putStrLn ""
  putStrLn "A Lista de Itens Encontrados:"
  imprimirAchados achados
  programa 11 achados perdidos
 
 operacoes 5 achados perdidos = do
+
  -- Lista dos Objetos Perdidos Por Categoria
+ 
  putStrLn ""
  putStrLn "Digite a Categoria:"
  categoria <- getLine
@@ -187,7 +190,7 @@ operacoes 5 achados perdidos = do
  programa 11 achados perdidos
 
 
--- operacoes 6 = do
+-- operacoes 6 = do 
 
 -- operacoes 7 = do
 
@@ -196,13 +199,21 @@ operacoes 5 achados perdidos = do
 -- operacoes 9 = do
 
 operacoes 10 achados perdidos = do
+
+ -- Popular Database
+ 
  popularDatabase achados perdidos
 
 operacoes _ achados perdidos = do
+ 
+ -- Operacao Default - Volta para a Selecao
+ 
  programa 11 achados perdidos
 
 
---Objeto Achado
+--Funcoes de Objeto Achado
+
+--Adiciona Objeto Achado na Lista
 
 adicionaAchado :: [Achado] -> Achado -> [Achado]
 adicionaAchado [] novo = [novo] 
@@ -248,11 +259,13 @@ printCategoriaAchado (Achado {categoria = cate} ) = "Categoria do Objeto: " ++ c
 
 --Objeto Perdido
 
+--Adiciona Objeto Perdido na Lista
+
 adicionaPerdido :: [Perdido] -> Perdido -> [Perdido]
 adicionaPerdido [] novo = [novo] 
 adicionaPerdido (x:xs) novo = [x] ++ (adicionaPerdido xs novo)
 
---Imprimir Lista de Objetos PPerdidos
+--Imprimir Lista de Objetos Perdidos
 
 imprimirPerdidos :: [Perdido] -> IO()
 imprimirPerdidos [] = do
@@ -269,7 +282,7 @@ imprimirPerdidos (x:xs) = do
  putStrLn ""
  imprimirPerdidos xs
 
--- prints de Perdido
+-- Prints de Perdido
 
 printLocalPerdido :: Perdido -> String
 printLocalPerdido (Perdido {ondeEsqueceu = onde} ) = "O Objeto foi esquecido  em: " ++ onde
@@ -289,21 +302,27 @@ printDescricaoPerdido (Perdido {descricaoEsc = desc} ) = "Descricao do Objeto: "
 printCategoriaPerdido :: Perdido -> String
 printCategoriaPerdido (Perdido {categoriaEsc = cate} ) = "Categoria do Objeto: " ++ cate
 
---imprimir perdidos categoria
+--Imprimir Lista de Perdidos por Categoria
 
 imprimirPerdidosCat :: [Perdido] -> String -> Int ->  IO()
 imprimirPerdidosCat [] _ 1 = do
- -- pelo menos uma ocorrencia
+ 
+ -- Quando Ocorre Pelo Menos uma Ocorrencia 
+
  putStrLn "Fim da Lista"
  putStrLn ""
 imprimirPerdidosCat [] categoria 0 = do
- -- Caso nao tenham nenhuma ocorrencia
+
+ -- Caso Nao Ocorra nenhuma Ocorrencia
+
  putStrLn ""
  putStrLn ("Nao Existem Itens Perdidos da Categoria: " ++ categoria)
  putStrLn ""
 imprimirPerdidosCat (x:xs) categoria existe
  |(categoriaEsc x) == categoria && existe == 0 = do
+
   -- Primeira Ocorrencia
+
   putStrLn ""
   putStrLn ("Lista de Itens Perdidos da Categoria: " ++ categoria)
   putStrLn ""
@@ -316,7 +335,9 @@ imprimirPerdidosCat (x:xs) categoria existe
   putStrLn ""
   imprimirPerdidosCat xs categoria 1
  |(categoriaEsc x) == categoria && existe == 1 = do
-  -- Segunda a Diante
+
+  -- Segunda Ococrrencia em Diante
+
   putStrLn ""
   putStrLn (printLocalPerdido x)
   putStrLn (printDataPerdido x)
@@ -328,11 +349,13 @@ imprimirPerdidosCat (x:xs) categoria existe
   imprimirPerdidosCat xs categoria 1
  | otherwise = imprimirPerdidosCat xs categoria existe
 
---popular a database com x numeros
+--Popular as Listas de Achados e Perdidos com x Objetos
 
 popularDatabase :: [Achado] -> [Perdido] -> IO()
 popularDatabase achados perdidos = do
 
+ -- Lista de Valores Possiveis
+ 
  let nomes = ["João", "Maria", "Antonio", "Lucas", "Lara", "Matheus", "Barbara", "Sara", "Carlos", "Vinicius"]
  let locais = ["LCC3", "LCC2", "CAA", "CD", "BC", "Biblioteca", "Diretoria", "SPLAB", "REENGE", "Seu Olavo"]
  let descricoes = ["é Preto", "é Branco", "é Azul", "é Verde", "é Amarelo", "é Vermelho", "é Laranja", "é Rosa", "é Roxo", "é Marrom"]
@@ -344,7 +367,7 @@ popularDatabase achados perdidos = do
  quant <- readLn :: IO Int
  adicionaRand achados perdidos quant quant nomes locais descricoes categorias datas
 
---adiciona x elementos randomicos em achados e perdidos 
+--Adiciona x Objetos Randomicos (Achados e Perdidos) nas Listas Achados e Perdidos
 
 adicionaRand :: [Achado] -> [Perdido] -> Int -> Int -> [String] -> [String] -> [String] -> [String] -> [String] -> IO()
 adicionaRand achados perdidos 0 total _ _ _ _ _ = do
