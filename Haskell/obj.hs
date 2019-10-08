@@ -234,13 +234,13 @@ printDataAchado :: Achado -> String
 printDataAchado (Achado {quandoAchou = quando} ) = "Data: " ++ quando
 
 printQuemAchado :: Achado -> String
-printQuemAchado (Achado {quemAchou = quem } ) = "Achado por:" ++ quem
+printQuemAchado (Achado {quemAchou = quem } ) = "Achado por: " ++ quem
 
 printNomeObjAchado :: Achado -> String
-printNomeObjAchado (Achado {nomeObjeto = nome} ) = "Nome do Objeto:" ++ nome 
+printNomeObjAchado (Achado {nomeObjeto = nome} ) = "Nome do Objeto: " ++ nome 
 
 printDescricaoAchado :: Achado -> String
-printDescricaoAchado (Achado {descricao = desc} ) = "Descricao do Objeto:" ++ desc 
+printDescricaoAchado (Achado {descricao = desc} ) = "Descricao do Objeto: " ++ desc 
 
 printCategoriaAchado :: Achado -> String
 printCategoriaAchado (Achado {categoria = cate} ) = "Categoria do Objeto: " ++ cate
@@ -278,13 +278,13 @@ printDataPerdido :: Perdido -> String
 printDataPerdido (Perdido {quandoEsqueceu = quando} ) = "Data: " ++ quando
 
 printDonoPerdido :: Perdido -> String
-printDonoPerdido (Perdido {dono = dono } ) = "Dono:" ++ dono
+printDonoPerdido (Perdido {dono = dono } ) = "Dono: " ++ dono
 
 printNomeObjPerdido :: Perdido -> String
-printNomeObjPerdido (Perdido {nomeObjetoEsc = nome} ) = "Nome do Objeto:" ++ nome 
+printNomeObjPerdido (Perdido {nomeObjetoEsc = nome} ) = "Nome do Objeto: " ++ nome 
 
 printDescricaoPerdido :: Perdido -> String
-printDescricaoPerdido (Perdido {descricaoEsc = desc} ) = "Descricao do Objeto:" ++ desc 
+printDescricaoPerdido (Perdido {descricaoEsc = desc} ) = "Descricao do Objeto: " ++ desc 
 
 printCategoriaPerdido :: Perdido -> String
 printCategoriaPerdido (Perdido {categoriaEsc = cate} ) = "Categoria do Objeto: " ++ cate
@@ -305,7 +305,7 @@ imprimirPerdidosCat (x:xs) categoria existe
  |(categoriaEsc x) == categoria && existe == 0 = do
   -- Primeira Ocorrencia
   putStrLn ""
-  putStrLn "Lista de Itens Perdidos da Categoria: "
+  putStrLn ("Lista de Itens Perdidos da Categoria: " ++ categoria)
   putStrLn ""
   putStrLn (printLocalPerdido x)
   putStrLn (printDataPerdido x)
@@ -328,6 +328,7 @@ imprimirPerdidosCat (x:xs) categoria existe
   imprimirPerdidosCat xs categoria 1
  | otherwise = imprimirPerdidosCat xs categoria existe
 
+--popular a database com x numeros
 
 popularDatabase :: [Achado] -> [Perdido] -> IO()
 popularDatabase achados perdidos = do
@@ -338,16 +339,18 @@ popularDatabase achados perdidos = do
  let categorias = ["Caderno", "Caneta", "Fone de Ouvido", "Bolsa", "Oculos", "Carteira", "Chave", "Capacete", "Celular", "Garrafa"]
  let datas = ["20/01/2019","30/01/2019","15/02/2019","30/05/2019","02/06/2019","19/08/2019","28/09/2019","22/10/2019","08/11/2019","12/12/2019"]
 
+ putStrLn ""
  putStrLn "Digite o numero de Elementos a serem adicionados:"
  quant <- readLn :: IO Int
  adicionaRand achados perdidos quant quant nomes locais descricoes categorias datas
 
+--adiciona x elementos randomicos em achados e perdidos 
 
 adicionaRand :: [Achado] -> [Perdido] -> Int -> Int -> [String] -> [String] -> [String] -> [String] -> [String] -> IO()
 adicionaRand achados perdidos 0 total _ _ _ _ _ = do
  putStrLn ""
- putStrLn (show total ++ "Itens Perdidos foram Cadastrados")
- putStrLn (show total ++ "Itens Encontrados foram Cadastrados")
+ putStrLn (show total ++ " Itens Perdidos foram Cadastrados")
+ putStrLn (show total ++ " Itens Encontrados foram Cadastrados")
  programa 11 achados perdidos
 adicionaRand achados perdidos quant total nomes locais descricoes categorias datas
  |(quant < 0) = do
@@ -355,16 +358,16 @@ adicionaRand achados perdidos quant total nomes locais descricoes categorias dat
   putStrLn "Numero Invalido, Digite um numero inteiro positivo maior que 0:"
   operacoes 10  achados perdidos
  |otherwise = do
-  id1 <- ramdomRIO (0, 9) :: IO Int
-  id2 <- ramdomRIO (0, 9) :: IO Int
-  id3 <- ramdomRIO (0, 9) :: IO Int
-  id4 <- ramdomRIO (0, 9) :: IO Int
-  id5 <- ramdomRIO (0, 9) :: IO Int
-  id6 <- ramdomRIO (0, 9) :: IO Int
-  id7 <- ramdomRIO (0, 9) :: IO Int
-  id8 <- ramdomRIO (0, 9) :: IO Int
-  id9 <- ramdomRIO (0, 9) :: IO Int
-  id10 <- ramdomRIO (0, 9) :: IO Int
+  id1 <- randomRIO (0, 9) :: IO Int
+  id2 <- randomRIO (0, 9) :: IO Int
+  id3 <- randomRIO (0, 9) :: IO Int
+  id4 <- randomRIO (0, 9) :: IO Int
+  id5 <- randomRIO (0, 9) :: IO Int
+  id6 <- randomRIO (0, 9) :: IO Int
+  id7 <- randomRIO (0, 9) :: IO Int
+  id8 <- randomRIO (0, 9) :: IO Int
+  id9 <- randomRIO (0, 9) :: IO Int
+  id10 <- randomRIO (0, 9) :: IO Int
 
 
   let novoAchado = Achado {ondeAchou = locais!!id1, 
