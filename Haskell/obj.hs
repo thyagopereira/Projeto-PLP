@@ -1,3 +1,6 @@
+
+import System.Random
+
 data Achado = Achado
  {
   ondeAchou :: String ,
@@ -18,9 +21,8 @@ data Perdido = Perdido
   categoriaEsc :: String
  }deriving Show
 
-main :: IO()
+
 main = do
- 
  programa 11 [] []
  -- let bola = Achado {ondeAchou = "LCC2", 
  --                    quandoAchou = "01/01/2019",
@@ -75,9 +77,14 @@ programa _ achados perdidos = do
 
 operacoes :: Int -> [Achado] -> [Perdido] -> IO()
 
+
+operacoes 0 achados perdidos = do
+ putStrLn ""
+ putStrLn "Fim do Programa"
+
 operacoes 1 achados perdidos = do
 
- --Cadastrar Objeto Achado 
+ --Cadastrar Objeto Perdido
  putStrLn ""
  putStrLn "Local que Esqueceu:"
  localEsc <- getLine
@@ -98,7 +105,7 @@ operacoes 1 achados perdidos = do
  categoriaEsceu <- getLine
  putStrLn ""
 
- --cria o novo objeto achado
+ --cria o novo objeto perdido
  let novoPerdido = Perdido {ondeEsqueceu = localEsc, 
                             quandoEsqueceu = dataEsc,
                             dono = donoEsc,
@@ -106,6 +113,7 @@ operacoes 1 achados perdidos = do
                             descricaoEsc = descricaoEsceu,
                             categoriaEsc = categoriaEsceu
                            }
+
  programa 11 achados (adicionaPerdido perdidos novoPerdido)
 
 operacoes 2 achados perdidos = do
@@ -139,24 +147,45 @@ operacoes 2 achados perdidos = do
                        descricao = descricaoEnc,
                        categoria = categoriaEnc
                       }
+
  programa 11 (adicionaAchado achados novoAchado) perdidos
 
+operacoes 3 achados [] = do
+ -- Lista dos Objetos Perdidos  Vazia
+ putStrLn ""
+ putStrLn "A Lista de Itens Perdidos esta vazia."
+ putStrLn ""
+ programa 11 achados []
 
-operacoes 3 achados perdidos= do
- 
+operacoes 3 achados perdidos = do
  -- Lista dos  Objetos Perdidos
  putStrLn ""
+ putStrLn "A Lista de Itens Perdidos: "
  imprimirPerdidos perdidos
  programa 11 achados perdidos
 
-operacoes 4 achados perdidos= do
+operacoes 4 [] perdidos = do
+ -- Lista dos Objetos Achados Vazia
+ putStrLn ""
+ putStrLn "A Lista de Itens Encontrados esta vazia."
+ putStrLn ""
+ programa 11 [] perdidos
 
+operacoes 4 achados perdidos= do
  -- Lista dos  Objetos Achados
  putStrLn ""
+ putStrLn "A Lista de Itens Encontrados:"
  imprimirAchados achados
  programa 11 achados perdidos
 
--- operacoes 5 = do
+operacoes 5 achados perdidos = do
+ -- Lista dos Objetos Perdidos Por Categoria
+ putStrLn ""
+ putStrLn "Digite a Categoria:"
+ categoria <- getLine
+ imprimirPerdidosCat perdidos categoria 0
+ programa 11 achados perdidos
+
 
 -- operacoes 6 = do
 
@@ -166,7 +195,8 @@ operacoes 4 achados perdidos= do
 
 -- operacoes 9 = do
 
--- operacoes 10 = do
+operacoes 10 achados perdidos = do
+ popularDatabase achados perdidos
 
 operacoes _ achados perdidos = do
  programa 11 achados perdidos
@@ -182,7 +212,6 @@ adicionaAchado (x:xs) novo = [x] ++ (adicionaAchado xs novo)
 
 imprimirAchados :: [Achado] -> IO()
 imprimirAchados [] = do
- putStrLn ""
  putStrLn "Fim da Lista"
  putStrLn ""
 imprimirAchados (x:xs) = do
@@ -227,7 +256,6 @@ adicionaPerdido (x:xs) novo = [x] ++ (adicionaPerdido xs novo)
 
 imprimirPerdidos :: [Perdido] -> IO()
 imprimirPerdidos [] = do
- putStrLn ""
  putStrLn "Fim da Lista"
  putStrLn ""
 imprimirPerdidos (x:xs) = do
@@ -261,3 +289,98 @@ printDescricaoPerdido (Perdido {descricaoEsc = desc} ) = "Descricao do Objeto:" 
 printCategoriaPerdido :: Perdido -> String
 printCategoriaPerdido (Perdido {categoriaEsc = cate} ) = "Categoria do Objeto: " ++ cate
 
+--imprimir perdidos categoria
+
+imprimirPerdidosCat :: [Perdido] -> String -> Int ->  IO()
+imprimirPerdidosCat [] _ 1 = do
+ -- pelo menos uma ocorrencia
+ putStrLn "Fim da Lista"
+ putStrLn ""
+imprimirPerdidosCat [] categoria 0 = do
+ -- Caso nao tenham nenhuma ocorrencia
+ putStrLn ""
+ putStrLn ("Nao Existem Itens Perdidos da Categoria: " ++ categoria)
+ putStrLn ""
+imprimirPerdidosCat (x:xs) categoria existe
+ |(categoriaEsc x) == categoria && existe == 0 = do
+  -- Primeira Ocorrencia
+  putStrLn ""
+  putStrLn "Lista de Itens Perdidos da Categoria: "
+  putStrLn ""
+  putStrLn (printLocalPerdido x)
+  putStrLn (printDataPerdido x)
+  putStrLn (printDonoPerdido x)
+  putStrLn (printNomeObjPerdido x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaPerdido x)
+  putStrLn ""
+  imprimirPerdidosCat xs categoria 1
+ |(categoriaEsc x) == categoria && existe == 1 = do
+  -- Segunda a Diante
+  putStrLn ""
+  putStrLn (printLocalPerdido x)
+  putStrLn (printDataPerdido x)
+  putStrLn (printDonoPerdido x)
+  putStrLn (printNomeObjPerdido x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaPerdido x)
+  putStrLn ""
+  imprimirPerdidosCat xs categoria 1
+ | otherwise = imprimirPerdidosCat xs categoria existe
+
+
+popularDatabase :: [Achado] -> [Perdido] -> IO()
+popularDatabase achados perdidos = do
+
+ let nomes = ["João", "Maria", "Antonio", "Lucas", "Lara", "Matheus", "Barbara", "Sara", "Carlos", "Vinicius"]
+ let locais = ["LCC3", "LCC2", "CAA", "CD", "BC", "Biblioteca", "Diretoria", "SPLAB", "REENGE", "Seu Olavo"]
+ let descricoes = ["é Preto", "é Branco", "é Azul", "é Verde", "é Amarelo", "é Vermelho", "é Laranja", "é Rosa", "é Roxo", "é Marrom"]
+ let categorias = ["Caderno", "Caneta", "Fone de Ouvido", "Bolsa", "Oculos", "Carteira", "Chave", "Capacete", "Celular", "Garrafa"]
+ let datas = ["20/01/2019","30/01/2019","15/02/2019","30/05/2019","02/06/2019","19/08/2019","28/09/2019","22/10/2019","08/11/2019","12/12/2019"]
+
+ putStrLn "Digite o numero de Elementos a serem adicionados:"
+ quant <- readLn :: IO Int
+ adicionaRand achados perdidos quant quant nomes locais descricoes categorias datas
+
+
+adicionaRand :: [Achado] -> [Perdido] -> Int -> Int -> [String] -> [String] -> [String] -> [String] -> [String] -> IO()
+adicionaRand achados perdidos 0 total _ _ _ _ _ = do
+ putStrLn ""
+ putStrLn (show total ++ "Itens Perdidos foram Cadastrados")
+ putStrLn (show total ++ "Itens Encontrados foram Cadastrados")
+ programa 11 achados perdidos
+adicionaRand achados perdidos quant total nomes locais descricoes categorias datas
+ |(quant < 0) = do
+  putStrLn ""
+  putStrLn "Numero Invalido, Digite um numero inteiro positivo maior que 0:"
+  operacoes 10  achados perdidos
+ |otherwise = do
+  id1 <- ramdomRIO (0, 9) :: IO Int
+  id2 <- ramdomRIO (0, 9) :: IO Int
+  id3 <- ramdomRIO (0, 9) :: IO Int
+  id4 <- ramdomRIO (0, 9) :: IO Int
+  id5 <- ramdomRIO (0, 9) :: IO Int
+  id6 <- ramdomRIO (0, 9) :: IO Int
+  id7 <- ramdomRIO (0, 9) :: IO Int
+  id8 <- ramdomRIO (0, 9) :: IO Int
+  id9 <- ramdomRIO (0, 9) :: IO Int
+  id10 <- ramdomRIO (0, 9) :: IO Int
+
+
+  let novoAchado = Achado {ondeAchou = locais!!id1, 
+                           quandoAchou = datas!!id2,
+                           quemAchou = nomes!!id3,
+                           nomeObjeto = categorias!!id4,
+                           descricao = descricoes!!id5,
+                           categoria = categorias!!id4
+                          }
+
+  let novoPerdido = Perdido {ondeEsqueceu = locais!!id6, 
+                             quandoEsqueceu = datas!!id7,
+                             dono = nomes!!id8,
+                             nomeObjetoEsc = categorias!!id9,
+                             descricaoEsc = descricoes!!id10,
+                             categoriaEsc = categorias!!id9
+                            }
+
+  adicionaRand (adicionaAchado achados novoAchado) (adicionaPerdido perdidos novoPerdido) (quant-1) total nomes locais descricoes categorias datas
