@@ -62,6 +62,7 @@ programa _ achados perdidos = do
  programa 11 achados perdidos
 
 --Operacoes do Programa
+
 operacoes :: Int -> [Achado] -> [Perdido] -> IO()
 
 operacoes 0 achados perdidos = do
