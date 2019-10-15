@@ -190,14 +190,37 @@ operacoes 5 achados perdidos = do
  imprimirPerdidosCat perdidos categoria 0
  programa 11 achados perdidos
 
+-- Lista dos Objetos Encontrados por Categoria 
+ 
+ putStrLn ""
+ putStrLn "Digite a Categoria:"
+ categoria <- getLine
+ imprimirAchadosCat achados categoria 0
+ programa 11 achados perdidos
 
--- operacoes 6 = do 
+-- Busca por Nome do Objeto
 
--- operacoes 7 = do
+ putStrLn ""
+ putStrLn "Digite o Nome do Objeto:"
+ nome <- getLine
+ imprimirPorNome perdidos nome 0
+ programa 11 achados perdidos
 
--- operacoes 8 = do
+-- Busca por Pessoa que Perdeu
 
--- operacoes 9 = do
+ putStrLn ""
+ putStrLn "Digite o nome da Pessoa que Perdeu:"
+ quemPerdeu <- getLine
+ imprimirPorPerdeu achados quemPerdeu 0
+ programa 11 achados perdidos
+
+-- Busca por Pessoa que Encontrou
+
+ putStrLn ""
+ putStrLn "Digite o nome da Pessoa que Encontrou:"
+ quemEncontrou <- getLine
+ imprimirPorAchou achados quemEncontrou 0
+ programa 11 achados perdidos
 
 operacoes 10 achados perdidos = do
 
