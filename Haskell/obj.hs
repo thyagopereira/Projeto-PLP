@@ -200,27 +200,27 @@ operacoes 5 achados perdidos = do
 
 -- Busca por Nome do Objeto
 
- putStrLn ""
- putStrLn "Digite o Nome do Objeto:"
- nome <- getLine
- imprimirPorNome perdidos nome 0
- programa 11 achados perdidos
+putStrLn ""
+putStrLn "Digite o Nome do Objeto:"
+nomeObj <- getLine
+imprimirPorNome perdidos nomeObj 0
+programa 11 achados perdidos
 
--- Busca por Pessoa que Perdeu
+-- Busca por Pessoa quem Perdeu
 
- putStrLn ""
- putStrLn "Digite o nome da Pessoa que Perdeu:"
- quemPerdeu <- getLine
- imprimirPorPerdeu achados quemPerdeu 0
- programa 11 achados perdidos
+putStrLn ""
+putStrLn "Digite o nome da Pessoa que Perdeu:"
+quemPerdeu <- getLine
+imprimirPorPerdeu perdidos quemPerdeu 0
+programa 11 achados perdidos
 
--- Busca por Pessoa que Encontrou
+-- Busca por Pessoa quem Encontrou
 
- putStrLn ""
- putStrLn "Digite o nome da Pessoa que Encontrou:"
- quemEncontrou <- getLine
- imprimirPorAchou achados quemEncontrou 0
- programa 11 achados perdidos
+putStrLn ""
+putStrLn "Digite o nome da Pessoa que Encontrou:"
+quemEncontrou <- getLine
+imprimirPorAchou achados quemEncontrou 0
+programa 11 achados perdidos
 
 operacoes 10 achados perdidos = do
 
@@ -326,7 +326,7 @@ printDescricaoPerdido (Perdido {descricaoEsc = desc} ) = "Descricao do Objeto: "
 printCategoriaPerdido :: Perdido -> String
 printCategoriaPerdido (Perdido {categoriaEsc = cate} ) = "Categoria do Objeto: " ++ cate
 
---Imprimir Lista de Perdidos por Categoria
+--Imprimir Lista de Perdidos por Categoria ||||||||||||||||||||||||||||||||||||||||||||||
 
 imprimirPerdidosCat :: [Perdido] -> String -> Int ->  IO()
 imprimirPerdidosCat [] _ 1 = do
@@ -372,6 +372,197 @@ imprimirPerdidosCat (x:xs) categoria existe
   putStrLn ""
   imprimirPerdidosCat xs categoria 1
  | otherwise = imprimirPerdidosCat xs categoria existe
+ 
+ 
+ --Imprimir Lista de Achados por Categoria  ||||||||||||||||||||||||||||||||||||||||||||||
+
+imprimirAchadosCat :: [Achado] -> String -> Int ->  IO()
+imprimirAchadosCat [] _ 1 = do
+ 
+ -- Quando Ocorre Pelo Menos uma Ocorrencia 
+
+ putStrLn "Fim da Lista"
+ putStrLn ""
+imprimirAchadosCat [] categoria 0 = do
+
+ -- Caso Nao Ocorra nenhuma Ocorrencia
+
+ putStrLn ""
+ putStrLn ("Nao Existem Itens Achados da Categoria: " ++ categoria)
+ putStrLn ""
+imprimirAchadosCat (x:xs) categoria existe
+ |(categoriaEnc x) == categoria && existe == 0 = do
+
+  -- Primeira Ocorrencia
+
+  putStrLn ""
+  putStrLn ("Lista de Itens Achados da Categoria: " ++ categoria)
+  putStrLn ""
+  putStrLn (printLocalAchado x)
+  putStrLn (printDataAchado x)
+  putStrLn (printQuemAchado x)
+  putStrLn (printNomeObjAchado x)
+  putStrLn (printDescricaoAchado x)
+  putStrLn (printCategoriaAchado x)
+  putStrLn ""
+  imprimirAchadosCat xs categoria 1
+ |(categoriaEnc x) == categoria && existe == 1 = do
+
+  -- Segunda Ococrrencia em Diante
+
+  putStrLn ""
+  putStrLn (printLocalAchado x)
+  putStrLn (printDataAchado x)
+  putStrLn (printQuemAchado x)
+  putStrLn (printNomeObjAchado x)
+  putStrLn (printDescricaoAchado x)
+  putStrLn (printCategoriaAchado x)
+  putStrLn ""
+  imprimirAchadosCat xs categoria 1
+ | otherwise = imprimirAchadosCat xs categoria existe
+
+ --Imprimir Lista Por nome do Objeto Perdido ||||||||||||||||||||||||||||||||||||||||||||||
+
+imprimirPorNome :: [Perdido] -> String -> Int ->  IO()
+imprimirPorNome [] _ 1 = do
+ 
+ -- Quando Ocorre Pelo Menos uma Ocorrencia 
+
+ putStrLn "Fim da Lista"
+ putStrLn ""
+imprimirPorNome [] nomeObj 0 = do
+
+ -- Caso Nao Ocorra nenhuma Ocorrencia
+
+ putStrLn ""
+ putStrLn ("Nao Existem Itens Perdidos com este Nome " ++ nomeObj)
+ putStrLn ""
+imprimirPorNome (x:xs) nomeObj existe
+ |(nomeObjetoEsc x) == nomeObj && existe == 0 = do
+
+  -- Primeira Ocorrencia
+
+  putStrLn ""
+  putStrLn ("Lista de Itens Perdidos com este nome: " ++ nomeObj)
+  putStrLn ""
+  putStrLn (printLocalPerdido x)
+  putStrLn (printDataPerdido x)
+  putStrLn (printDonoPerdido x)
+  putStrLn (printNomeObjPerdido x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaPerdido x)
+  putStrLn ""
+  imprimirPorNome xs nomeObj 1
+ |(nomeObjetoEsc x) == nomeObj && existe == 1 = do
+
+  -- Segunda Ococrrencia em Diante
+
+  putStrLn ""
+  putStrLn (printLocalPerdido x)
+  putStrLn (printDataPerdido x)
+  putStrLn (printDonoPerdido x)
+  putStrLn (printNomeObjPerdido x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaPerdido x)
+  putStrLn ""
+  imprimirPorNome xs nomeObj 1
+ | otherwise = imprimirPorNome xs nomeObj existe
+
+ --Imprimir Lista Por nome de Quem Perdeu ||||||||||||||||||||||||||||||||||||||||||||||
+
+imprimirPorPerdeu :: [Perdido] -> String -> Int ->  IO()
+imprimirPorPerdeu [] _ 1 = do
+ 
+ -- Quando Ocorre Pelo Menos uma Ocorrencia 
+
+ putStrLn "Fim da Lista"
+ putStrLn ""
+imprimirPorPerdeu [] quemPerdeu 0 = do
+
+ -- Caso Nao Ocorra nenhuma Ocorrencia
+
+ putStrLn ""
+ putStrLn ("Ninguém com este nome perdeu um Objeto " ++ quemPerdeu)
+ putStrLn ""
+imprimirPorPerdeu (x:xs) quemPerdeu existe
+ |(donoEsc x) == quemPerdeu && existe == 0 = do
+
+  -- Primeira Ocorrencia
+
+  putStrLn ""
+  putStrLn ("Lista das pessoas com este nome que perderam algo: " ++ quemPerdeu)
+  putStrLn ""
+  putStrLn (printLocalPerdido x)
+  putStrLn (printDataPerdido x)
+  putStrLn (printDonoPerdido x)
+  putStrLn (printNomeObjPerdido x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaPerdido x)
+  putStrLn ""
+  imprimirPorPerdeu xs quemPerdeu 1
+ |(donoEsc x) == quemPerdeu && existe == 1 = do
+
+  -- Segunda Ococrrencia em Diante
+
+  putStrLn ""
+  putStrLn (printLocalPerdido x)
+  putStrLn (printDataPerdido x)
+  putStrLn (printDonoPerdido x)
+  putStrLn (printNomeObjPerdido x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaPerdido x)
+  putStrLn ""
+  imprimirPorPerdeu xs quemPerdeu 1
+ | otherwise = imprimirPorPerdeu xs quemPerdeu existe
+
+  --Imprimir Lista Por nome de Quem Achou ||||||||||||||||||||||||||||||||||||||||||||||
+
+imprimirPorAchou :: [Achado] -> String -> Int ->  IO()
+imprimirPorAchou [] _ 1 = do
+ 
+ -- Quando Ocorre Pelo Menos uma Ocorrencia 
+
+ putStrLn "Fim da Lista"
+ putStrLn ""
+imprimirPorAchou [] quemAchou 0 = do
+
+ -- Caso Nao Ocorra nenhuma Ocorrencia
+
+ putStrLn ""
+ putStrLn ("Ninguém com este nome achou um Objeto " ++ quemAchou)
+ putStrLn ""
+imprimirPorAchou (x:xs) quemAchou existe
+ |(nomeQuemEnc x) == quemAchou && existe == 0 = do
+
+  -- Primeira Ocorrencia
+
+  putStrLn ""
+  putStrLn ("Lista das pessoas com este nome que acharam algo: " ++ quemAchou)
+  putStrLn ""
+  putStrLn (printLocalAchado x)
+  putStrLn (printDataAchado x)
+  putStrLn (printQuemAchado x)
+  putStrLn (printNomeObjAchado x)
+  putStrLn (printDescricaoPerdido x)
+  putStrLn (printCategoriaAchado x)
+  putStrLn ""
+  imprimirPorAchou xs quemAchou 1
+ |(nomeQuemEnc x) == quemAchou && existe == 1 = do
+
+  -- Segunda Ococrrencia em Diante
+
+  putStrLn ""
+  putStrLn (printLocalAchado x)
+  putStrLn (printDataAchado x)
+  putStrLn (printQuemAchado x)
+  putStrLn (printNomeObjAchado x)
+  putStrLn (printDescricaoAchado x)
+  putStrLn (printCategoriaAchado x)
+  putStrLn ""
+  imprimirPorAchou xs quemAchou 1
+ | otherwise = imprimirPorAchou xs quemAchou existe
+
+
 
 --Popular as Listas de Achados e Perdidos com x Objetos
 
