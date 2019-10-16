@@ -190,6 +190,8 @@ operacoes 5 achados perdidos = do
  imprimirPerdidosCat perdidos categoria 0
  programa 11 achados perdidos
 
+
+operacoes 6 achados perdidos = do
 -- Lista dos Objetos Encontrados por Categoria 
  
  putStrLn ""
@@ -198,29 +200,34 @@ operacoes 5 achados perdidos = do
  imprimirAchadosCat achados categoria 0
  programa 11 achados perdidos
 
+
+operacoes 7 achados perdidos = do
 -- Busca por Nome do Objeto
 
-putStrLn ""
-putStrLn "Digite o Nome do Objeto:"
-nomeObj <- getLine
-imprimirPorNome perdidos nomeObj 0
-programa 11 achados perdidos
+ putStrLn ""
+ putStrLn "Digite o Nome do Objeto:"
+ nomeObj <- getLine
+ imprimirPorNome perdidos nomeObj 0
+ programa 11 achados perdidos
 
+
+operacoes 8 achados perdidos = do
 -- Busca por Pessoa quem Perdeu
 
-putStrLn ""
-putStrLn "Digite o nome da Pessoa que Perdeu:"
-quemPerdeu <- getLine
-imprimirPorPerdeu perdidos quemPerdeu 0
-programa 11 achados perdidos
+ putStrLn ""
+ putStrLn "Digite o nome da Pessoa que Perdeu:"
+ quemPerdeu <- getLine
+ imprimirPorPerdeu perdidos quemPerdeu 0
+ programa 11 achados perdidos
 
+
+operacoes 9 achados perdidos = do
 -- Busca por Pessoa quem Encontrou
-
-putStrLn ""
-putStrLn "Digite o nome da Pessoa que Encontrou:"
-quemEncontrou <- getLine
-imprimirPorAchou achados quemEncontrou 0
-programa 11 achados perdidos
+ putStrLn ""
+ putStrLn "Digite o nome da Pessoa que Encontrou:"
+ quemEncontrou <- getLine
+ imprimirPorAchou achados quemEncontrou 0
+ programa 11 achados perdidos
 
 operacoes 10 achados perdidos = do
 
@@ -383,20 +390,22 @@ imprimirAchadosCat [] _ 1 = do
 
  putStrLn "Fim da Lista"
  putStrLn ""
-imprimirAchadosCat [] categoria 0 = do
+
+imprimirAchadosCat [] categoriaEnc 0 = do
 
  -- Caso Nao Ocorra nenhuma Ocorrencia
 
  putStrLn ""
- putStrLn ("Nao Existem Itens Achados da Categoria: " ++ categoria)
+ putStrLn ("Nao Existem Itens Achados da Categoria: " ++ categoriaEnc)
  putStrLn ""
-imprimirAchadosCat (x:xs) categoria existe
- |(categoriaEnc x) == categoria && existe == 0 = do
+ 
+imprimirAchadosCat (x:xs) categoriaEnc existe
+ |(categoria x) == categoriaEnc && existe == 0 = do
 
   -- Primeira Ocorrencia
 
   putStrLn ""
-  putStrLn ("Lista de Itens Achados da Categoria: " ++ categoria)
+  putStrLn ("Lista de Itens Achados da Categoria: " ++ categoriaEnc)
   putStrLn ""
   putStrLn (printLocalAchado x)
   putStrLn (printDataAchado x)
@@ -405,8 +414,8 @@ imprimirAchadosCat (x:xs) categoria existe
   putStrLn (printDescricaoAchado x)
   putStrLn (printCategoriaAchado x)
   putStrLn ""
-  imprimirAchadosCat xs categoria 1
- |(categoriaEnc x) == categoria && existe == 1 = do
+  imprimirAchadosCat xs categoriaEnc 1
+ |(categoria x) == categoriaEnc && existe == 1 = do
 
   -- Segunda Ococrrencia em Diante
 
@@ -418,8 +427,8 @@ imprimirAchadosCat (x:xs) categoria existe
   putStrLn (printDescricaoAchado x)
   putStrLn (printCategoriaAchado x)
   putStrLn ""
-  imprimirAchadosCat xs categoria 1
- | otherwise = imprimirAchadosCat xs categoria existe
+  imprimirAchadosCat xs categoriaEnc 1
+ | otherwise = imprimirAchadosCat xs categoriaEnc existe
 
  --Imprimir Lista Por nome do Objeto Perdido ||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -485,7 +494,7 @@ imprimirPorPerdeu [] quemPerdeu 0 = do
  putStrLn ("Ninguém com este nome perdeu um Objeto " ++ quemPerdeu)
  putStrLn ""
 imprimirPorPerdeu (x:xs) quemPerdeu existe
- |(donoEsc x) == quemPerdeu && existe == 0 = do
+ |(dono x) == quemPerdeu && existe == 0 = do
 
   -- Primeira Ocorrencia
 
@@ -500,7 +509,7 @@ imprimirPorPerdeu (x:xs) quemPerdeu existe
   putStrLn (printCategoriaPerdido x)
   putStrLn ""
   imprimirPorPerdeu xs quemPerdeu 1
- |(donoEsc x) == quemPerdeu && existe == 1 = do
+ |(dono x) == quemPerdeu && existe == 1 = do
 
   -- Segunda Ococrrencia em Diante
 
@@ -524,30 +533,30 @@ imprimirPorAchou [] _ 1 = do
 
  putStrLn "Fim da Lista"
  putStrLn ""
-imprimirPorAchou [] quemAchou 0 = do
+imprimirPorAchou [] quemAchouEnc 0 = do
 
  -- Caso Nao Ocorra nenhuma Ocorrencia
 
  putStrLn ""
- putStrLn ("Ninguém com este nome achou um Objeto " ++ quemAchou)
+ putStrLn ("Ninguém com este nome achou um Objeto " ++ quemAchouEnc)
  putStrLn ""
-imprimirPorAchou (x:xs) quemAchou existe
- |(nomeQuemEnc x) == quemAchou && existe == 0 = do
+imprimirPorAchou (x:xs) quemAchouEnc existe
+ |(quemAchou x) == quemAchouEnc && existe == 0 = do
 
   -- Primeira Ocorrencia
 
   putStrLn ""
-  putStrLn ("Lista das pessoas com este nome que acharam algo: " ++ quemAchou)
+  putStrLn ("Lista das pessoas com este nome que acharam algo: " ++ quemAchouEnc)
   putStrLn ""
   putStrLn (printLocalAchado x)
   putStrLn (printDataAchado x)
   putStrLn (printQuemAchado x)
   putStrLn (printNomeObjAchado x)
-  putStrLn (printDescricaoPerdido x)
+  putStrLn (printDescricaoAchado x)
   putStrLn (printCategoriaAchado x)
   putStrLn ""
-  imprimirPorAchou xs quemAchou 1
- |(nomeQuemEnc x) == quemAchou && existe == 1 = do
+  imprimirPorAchou xs quemAchouEnc 1
+ |(quemAchou x) == quemAchouEnc && existe == 1 = do
 
   -- Segunda Ococrrencia em Diante
 
@@ -559,12 +568,12 @@ imprimirPorAchou (x:xs) quemAchou existe
   putStrLn (printDescricaoAchado x)
   putStrLn (printCategoriaAchado x)
   putStrLn ""
-  imprimirPorAchou xs quemAchou 1
- | otherwise = imprimirPorAchou xs quemAchou existe
+  imprimirPorAchou xs quemAchouEnc 1
+ | otherwise = imprimirPorAchou xs quemAchouEnc existe
 
 
 
---Popular as Listas de Achados e Perdidos com x Objetos
+Popular as Listas de Achados e Perdidos com x Objetos
 
 popularDatabase :: [Achado] -> [Perdido] -> IO()
 popularDatabase achados perdidos = do
