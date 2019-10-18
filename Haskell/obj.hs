@@ -573,7 +573,7 @@ imprimirPorAchou (x:xs) quemAchouEnc existe
 
 
 
-Popular as Listas de Achados e Perdidos com x Objetos
+--Popular as Listas de Achados e Perdidos com x Objetos
 
 popularDatabase :: [Achado] -> [Perdido] -> IO()
 popularDatabase achados perdidos = do
