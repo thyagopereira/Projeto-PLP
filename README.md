@@ -22,8 +22,7 @@ Introdução: O projeto visa facilitar o processo de achados e perdidos no curso
 
 9- É possível popular a base de dados para averiguar as funcionalidades;
 
-10-É possível alterar a categoria dos objetos achados para Devolvidos;
-
+Obs : Para compilar o codigo em haskell é preciso uso da biblioteca Random.
 
 __Desenvolvedores__
 
