@@ -2,86 +2,105 @@
 
 %Fatos Auxiliares
 
-%ler_string
+%lerString
 
-atom_string(Atom, String).
-atom_chars(Atom, List).
-string_chars(String, List).
-read_line_to_codes(user_input, Entrada), atom_string(Entrada, Return).
-ler_string(X) :- read_line_to_codes(user_input, E), atom_string(E, X).
+lerString(X) :- read_line_to_codes(user_input, E), atom_string(E, X).
 
-%ler_numero
 
-ler_numero(N) :- read_line_to_codes(user_input, E), number_codes(N, E).
+%lerNumero
+
+lerNumero(N) :- read_line_to_codes(user_input, E), number_codes(N, E).
 
 %Fim 
 
-%Cadastrar Perdidos
+%cadastrarPerdido
 
-cadastrar_perdido :-
+cadastrarPerdido :-
     nl,
     write("Local que Esqueceu:"), nl,
-    ler_string(Local),
+    lerString(Local),
     write("Data que Perdeu:"), nl,
-    ler_string(Data),
+    lerString(Data),
     write("Nome do Dono:"), nl,
-    ler_string(Dono),
+    lerString(Dono),
     write("Nome do Objeto:"), nl,
-    ler_string(Objeto),
+    lerString(Objeto),
     write("Descreva o Objeto em Algumas Linhas:"), nl,
-    ler_string(Descricao),
+    lerString(Descricao),
     write("Categoria do Objeto:"), nl,
-    ler_string(Categoria),
-    cria_perdido(Local, Data, Dono, Objeto, Descricao, Categoria, P),
-    inserir_perdido(P),
+    lerString(Categoria),
+    criaPerdido(Local, Data, Dono, Objeto, Descricao, Categoria, P),
+    inserirPerdido(P),
     write("Objeto perdido cadastrado com sucesso !."), nl,
     write("Ficaremos atentos caso alguém o encontre !"), nl.
 
-%cria perdidos
+%cadastrarAchado
 
-cria_perdido(Local, Data, Dono, Objeto, Descricao, Categoria, P):-
+cadastrarAchado :-
+    nl,
+    write("Local que Encontrou:"), nl,
+    lerString(Local),
+    write("Data que Encontrou:"), nl,
+    lerString(Data),
+    write("Nome de Quem Encontrou:"), nl,
+    lerString(QuemAchou),
+    write("Nome do Objeto:"), nl,
+    lerString(Objeto),
+    write("Descreva o Objeto em Algumas Linhas:"), nl,
+    lerString(Descricao),
+    write("Categoria do Objeto:"), nl,
+    lerString(Categoria),
+    criaAchado(Local, Data, QuemAchou, Objeto, Descricao, Categoria, A),
+    inserirAchado(A),
+    write("Objeto encontrado cadastrado com sucesso !."), nl,
+    write("Ficaremos atentos caso o dono apareça!"), nl.
+
+
+%criaPerdidos
+
+criaPerdido(Local, Data, Dono, Objeto, Descricao, Categoria, P):-
     P = perdido(Local, Data, Dono, Objeto, Descricao, Categoria).
 
-%inserir perdido
+%inserirPerdido
 
-insere_inicio(H,L,[H|L]):- !.
+insereInicio(H,L,[H|L]):- !.
 
-insere_final([], Y, [Y]).         
-insere_final([I|R], Y, [I|R1]) :-
-    insere_final(R, Y, R1).
+insereFinal([], Y, [Y]).         
+insereFinal([I|R], Y, [I|R1]) :-
+    insereFinal(R, Y, R1).
 
-inserir_perdido(P):-
-    retract(objetos_perdidos(Lista)),
-    insere_final(Lista, P, NovaLista),
-    assert(objetos_perdidos(NovaLista)).
+inserirPerdido(P):-
+    retract(objetosPerdidos(Lista)),
+    insereFinal(Lista, P, NovaLista),
+    assert(objetosPerdidos(NovaLista)).
 
 
-%objetos_perdidos
+%objetosPerdidos
 
-objetos_perdidos([]).
+objetosPerdidos([]).
 
-:-dynamic objetos_perdidos/1.
+:-dynamic objetosPerdidos/1.
 
-%listar_perdidos
+%listarPerdidos
 
-listar_perdidos:-
-    objetos_perdidos(Lista),
-    imprime_perdidos(Lista).
+listarPerdidos:-
+    objetosPerdidos(Lista),
+    imprimePerdidos(Lista).
 
 %imprime perdidos
 
-imprime_perdidos([]):- 
+imprimePerdidos([]):- 
     nl,
     write("fim"),nl.
 
 
-imprime_perdidos([H|T]):-
-    to_string_perdido(H),
-    imprime_perdidos(T).
+imprimePerdidos([H|T]):-
+    toStringPerdido(H),
+    imprimePerdidos(T).
 
-%imprime perdido
+%toStringPerdido
 
-to_string_perdido(perdido(Local, Data, Dono, Objeto, Descricao, Categoria)):-
+toStringPerdido(perdido(Local, Data, Dono, Objeto, Descricao, Categoria)):-
     nl,
     write("O Objeto foi Esquecido: "),write(Local),nl,
     write("Data: "),write(Data), nl,
@@ -90,28 +109,77 @@ to_string_perdido(perdido(Local, Data, Dono, Objeto, Descricao, Categoria)):-
     write("Descrição do Objeto: "),write(Descricao), nl,
     write("Categoria do Objeto: "),write(Categoria), nl.
 
+
+%criaAchado
+
+criaAchado(Local, Data, QuemAchou, Objeto, Descricao, Categoria, A):-
+    A = achado(Local, Data, QuemAchou, Objeto, Descricao, Categoria).
+
+%objetosAchados
+
+objetosAchados([]).
+
+:-dynamic objetosAchados/1.
+
+%inserirAchado
+
+inserirAchado(A):-
+    retract(objetosAchados(Lista)),
+    insereFinal(Lista, A, NovaLista),
+    assert(objetosAchados(NovaLista)).
+
+%listarAchados
+
+listarAchados:-
+    objetosAchados(Lista),
+    imprimeAchados(Lista).
+
+%imprimeAchados
+
+imprimeAchados([]):-
+    nl,
+    write("fim"), nl.
+
+imprimeAchados([H|T]):-
+    toStringAchado(H),
+    imprimeAchados(T).
+
+%toStringAchado
+
+toStringAchado(achado(Local, Data, QuemAchou, Objeto, Descricao, Categoria)):-
+    nl,
+    write("O Objeto foi Encontrado em: "),write(Local),nl,
+    write("Data: "),write(Data), nl,
+    write("Achado Por: "),write(QuemAchou), nl,
+    write("Nome do Objeto: "),write(Objeto), nl,
+    write("Descrição do Objeto: "),write(Descricao), nl,
+    write("Categoria do Objeto: "),write(Categoria), nl.
+
+
 %Opções do Menu para Implementar
 
 menu(1):-
     nl,
     write("Operação de Cadastro de objetos Perdidos:"),nl,
-    cadastrar_perdido,
+    cadastrarPerdido,
     menu(99).
 
 menu(2):-
     nl,
     write("Operação de Cadastro de objetos Achados:"),nl,
+    cadastrarAchado,
     menu(99).
 
 menu(3):-
     nl,
     write("Lista de Perdidos:"),nl,
-    listar_perdidos,
+    listarPerdidos,
     menu(99).
 
 menu(4):-
     nl,
     write("Lista de Achados:"),nl,
+    listarAchados,
     menu(99).
 
 menu(5):-
@@ -160,7 +228,7 @@ menu(99) :-
     write("Digite  0  para sair do sistema e encerrar todas as operações"), nl,
     write("Digite sua opção ............"), nl,
     write(""),
-    ler_numero(E),
+    lerNumero(E),
     menu(E).
 
 menu(N):-
