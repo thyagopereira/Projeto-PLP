@@ -8,9 +8,7 @@ atom_string(Atom, String).
 atom_chars(Atom, List).
 string_chars(String, List).
 read_line_to_codes(user_input, Entrada), atom_string(Entrada, Return).
-ler_string(E):-
-    read_line_to_codes(user_input, X),
-    atom_string(X,E).
+ler_string(X) :- read_line_to_codes(user_input, E), atom_string(E, X).
 
 %ler_numero
 
@@ -35,6 +33,7 @@ cadastrar_perdido :-
     write("Categoria do Objeto:"), nl,
     ler_string(Categoria),
     cria_perdido(Local, Data, Dono, Objeto, Descricao, Categoria, P),
+    inserir_perdido(P),
     write("Objeto perdido cadastrado com sucesso !."), nl,
     write("Ficaremos atentos caso alguém o encontre !"), nl.
 
@@ -43,11 +42,25 @@ cadastrar_perdido :-
 cria_perdido(Local, Data, Dono, Objeto, Descricao, Categoria, P):-
     P = perdido(Local, Data, Dono, Objeto, Descricao, Categoria).
 
+%inserir perdido
+
+insere_inicio(H,L,[H|L]):- !.
+
+insere_final([], Y, [Y]).         
+insere_final([I|R], Y, [I|R1]) :-
+    insere_final(R, Y, R1).
+
+inserir_perdido(P):-
+    retract(objetos_perdidos(Lista)),
+    insere_final(Lista, P, NovaLista),
+    assert(objetos_perdidos(NovaLista)).
+
+
 %objetos_perdidos
 
-objetos_perdidos(Lista):-
-    findall(X,perdido(A,B,C,D,E,F),Lista).
-    
+objetos_perdidos([]).
+
+:-dynamic objetos_perdidos/1.
 
 %listar_perdidos
 
@@ -58,17 +71,19 @@ listar_perdidos:-
 %imprime perdidos
 
 imprime_perdidos([]):- 
-    write("fim").
+    nl,
+    write("fim"),nl.
+
 
 imprime_perdidos([H|T]):-
     to_string_perdido(H),
-    listar_perdidos(T).
+    imprime_perdidos(T).
 
 %imprime perdido
 
-to_string_perdido(Local, Data, Dono, Objeto, Descricao, Categoria):-
+to_string_perdido(perdido(Local, Data, Dono, Objeto, Descricao, Categoria)):-
     nl,
-    write("O Objeto foi Esquecido: "),write(Local),nl
+    write("O Objeto foi Esquecido: "),write(Local),nl,
     write("Data: "),write(Data), nl,
     write("Dono: "),write(Dono), nl,
     write("Nome do Objeto: "),write(Objeto), nl,
