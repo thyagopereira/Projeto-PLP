@@ -136,6 +136,7 @@ listarAchados:-
 
 %imprimeAchados
 
+
 imprimeAchados([]):-
     nl,
     write("fim"), nl.
@@ -143,6 +144,53 @@ imprimeAchados([]):-
 imprimeAchados([H|T]):-
     toStringAchado(H),
     imprimeAchados(T).
+
+%ListarAchadosCate
+listarAchadosCate :- 
+    nl,
+    write("Digite a Categoria:"),
+    nl , 
+    lerString(Categoria), 
+    objetosAchados(Lista),
+    listarAchadosCategoria(Lista,Categoria).
+
+%ListarAchadosCategoria 
+listarAchadosCategoria([],Elemento) :-
+    write("fim") ,nl .
+listarAchadosCategoria([H|_],Elemento):- 
+    compareCategoriaAchados(H,Elemento),
+    toStringAchado(H).
+listarAchadosCategoria([_|T],Elemento):- 
+    listarAchadosCategoria(T,Elemento).
+
+
+
+%ListarPerdidosCate
+listarPerdidosCate :- 
+    nl,
+    write("Digite a Categoria:"),
+    nl , 
+    lerString(Categoria), 
+    objetosPerdidos(Lista),
+    listarPerdidosCategoria(Lista,Categoria).
+
+%ListarPerdidosCategoria 
+listarPerdidosCategoria([],Elemento) :-
+    write("fim") ,nl .
+listarPerdidosCategoria([H|_],Elemento):- 
+    compareCategoria(H,Elemento),
+    toStringPerdido(H).
+listarPerdidosCategoria([_|T],Elemento):- 
+    listarPerdidosCategoria(T,Elemento).
+    
+%CompareCategoria Perdidos 
+compareCategoria(perdido(Local, Data, Dono, Objeto, Descricao, Elemento), Elemento).
+
+%CompareCategoria Achados 
+compareCategoriaAchados(achado(Local, Data, QuemAchou, Objeto, Descricao, Elemento), Elemento).
+
+
+
 
 %toStringAchado
 
@@ -185,11 +233,13 @@ menu(4):-
 menu(5):-
     nl,
     write("Lista de Perdidos por Categoria:"),nl,
+    listarPerdidosCate,
     menu(99).
 
 menu(6):-
     nl,
     write("Lista de Encontrados por Categoria:"),nl,
+    listarAchadosCate,
     menu(99).
 
 menu(7):-
