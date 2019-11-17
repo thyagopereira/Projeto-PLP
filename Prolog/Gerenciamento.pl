@@ -186,11 +186,29 @@ listarPerdidosCategoria([_|T],Elemento):-
 %CompareCategoria Perdidos 
 compareCategoria(perdido(Local, Data, Dono, Objeto, Descricao, Elemento), Elemento).
 
+%CompareNome Perdidos 
+compareNome(perdido(Local, Data, Dono, Elemento, Descricao,Categoria), Elemento).
+
 %CompareCategoria Achados 
 compareCategoriaAchados(achado(Local, Data, QuemAchou, Objeto, Descricao, Elemento), Elemento).
 
+%listaPerdidosNo
+listaPerdidosNo :- 
+    nl,
+    write("Digite o nome do objeto perdido:"),
+    nl , 
+    lerString(Nome), 
+    objetosPerdidos(Lista),
+    listarPerdidosNome(Lista,Nome).
 
-
+%ListarPerdidosNome 
+listarPerdidosNome([],Elemento) :-
+    write("fim") ,nl .
+listarPerdidosNome([H|_],Elemento):- 
+    compareNome(H,Elemento),
+    toStringPerdido(H).
+listarPerdidosNome([_|T],Elemento):- 
+    listarPerdidosNome(T,Elemento).
 
 %toStringAchado
 
@@ -245,6 +263,7 @@ menu(6):-
 menu(7):-
     nl,
     write("Busca por Nome:"),nl,
+    listaPerdidosNo,
     menu(99).
 
 menu(8):-
