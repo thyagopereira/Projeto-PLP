@@ -89,7 +89,7 @@ listarPerdidos:-
 
 %imprime perdidos
 
-imprimePerdidos([]):- f
+imprimePerdidos([]):- 
     nl,
     write("fim"),nl.
 
