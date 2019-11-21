@@ -89,7 +89,7 @@ listarPerdidos:-
 
 %imprime perdidos
 
-imprimePerdidos([]):- 
+imprimePerdidos([]):- f
     nl,
     write("fim"),nl.
 
@@ -163,8 +163,6 @@ listarAchadosCategoria([H|_],Elemento):-
 listarAchadosCategoria([_|T],Elemento):- 
     listarAchadosCategoria(T,Elemento).
 
-
-
 %ListarPerdidosCate
 listarPerdidosCate :- 
     nl,
@@ -182,15 +180,58 @@ listarPerdidosCategoria([H|_],Elemento):-
     toStringPerdido(H).
 listarPerdidosCategoria([_|T],Elemento):- 
     listarPerdidosCategoria(T,Elemento).
-    
+
+%ListarQuemPerd
+listarQuemPerd :- 
+    nl,
+    write("Digite o nome de quem perdeu:"),
+    nl , 
+    lerString(Dono), 
+    objetosPerdidos(Lista),
+    listarQuemPerdeu(Lista,Dono).
+
+%ListarQuemPerdeu
+listarQuemPerdeu([],Elemento) :-
+    write("fim") ,nl .
+listarQuemPerdeu([H|_],Elemento):- 
+    compareQuemPerdeu(H,Elemento),
+    toStringPerdido(H).
+listarQuemPerdeu([_|T],Elemento):- 
+    listarQuemPerdeu(T,Elemento).
+
+%ListarQuemAch
+listarQuemAch :- 
+    nl,
+    write("Digite o nome de quem achou o objeto:"),
+    nl , 
+    lerString(QuemAchou), 
+    objetosAchados(Lista),
+    listarQuemAchou(Lista,QuemAchou).
+
+%ListarQuemAchou
+listarQuemAchou([],Elemento) :-
+    write("fim") ,nl .
+listarQuemAchou([H|_],Elemento):- 
+    compareQuemAchou(H,Elemento),
+    toStringAchado(H).
+listarQuemAchou([_|T],Elemento):- 
+    listarQuemAchou(T,Elemento).
+
+
 %CompareCategoria Perdidos 
 compareCategoria(perdido(Local, Data, Dono, Objeto, Descricao, Elemento), Elemento).
 
 %CompareNome Perdidos 
-compareNome(perdido(Local, Data, Dono, Elemento, Descricao,Categoria), Elemento).
+compareNome(perdido(Local, Data, Dono, Elemento, Descricao, Categoria), Elemento).
 
 %CompareCategoria Achados 
 compareCategoriaAchados(achado(Local, Data, QuemAchou, Objeto, Descricao, Elemento), Elemento).
+
+%CompareQuemPerdeu Perdidos 
+compareQuemPerdeu(perdido(Local, Data, Elemento, Objeto, Descricao, Categoria), Elemento).
+
+%CompareAchou Achados 
+compareQuemAchou(achado(Local, Data, Elemento, Objeto, Descricao, Categoria), Elemento).
 
 %listaPerdidosNo
 listaPerdidosNo :- 
@@ -223,6 +264,8 @@ toStringAchado(achado(Local, Data, QuemAchou, Objeto, Descricao, Categoria)):-
 
 
 %Opções do Menu para Implementar
+menu(0):-
+    halt(0).
 
 menu(1):-
     nl,
@@ -269,11 +312,13 @@ menu(7):-
 menu(8):-
     nl,
     write("Busca por Pessoa que Perdeu:"),nl,
+    listarQuemPerd,
     menu(99).
 
 menu(9):-
     nl,
     write("Busca por Pessoa que Encontrou:"),nl,
+    listarQuemAch,
     menu(99).
 
 menu(10):-
@@ -308,9 +353,6 @@ menu(N):-
 
 
 %print write(""), nl,
-
-
-
 main:-
     menu(99),
     halt(0).
