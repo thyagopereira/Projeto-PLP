@@ -218,6 +218,38 @@ listarQuemAchou([_|T],Elemento):-
     listarQuemAchou(T,Elemento).
 
 
+%lista de possíveis valores
+nomes(["João", "Maria", "Antonio", "Lucas", "Lara", "Matheus", "Barbara", "Sara", "Carlos", "Vinicius"]).
+locais(["LCC3", "LCC2", "CAA", "CD", "BC", "Biblioteca", "Diretoria", "SPLAB", "REENGE", "Seu Olavo"]).
+descricoes(["é Preto", "é Branco", "é Azul", "é Verde", "é Amarelo", "é Vermelho", "é Laranja", "é Rosa", "é Roxo", "é Marrom"]).
+categorias(["Caderno", "Caneta", "Fone de Ouvido", "Bolsa", "Oculos", "Carteira", "Chave", "Capacete", "Celular", "Garrafa"]).
+datas(["20/01/2019","30/01/2019","15/02/2019","30/05/2019","02/06/2019","19/08/2019","28/09/2019","22/10/2019","08/11/2019","12/12/2019"]).
+
+%popularData
+popularData :- 
+    nl,
+    write("Digite a quantidade de objetos a serem cadastrados:"),
+    nl , 
+    lerString(Quant), 
+    atom_number(Quant, X),
+    objetosAchados(Lista),
+    objetosPerdidos(Lista2),
+    %nomes(Name)
+    popularDatabase(Lista, Lista2, X, Name).
+
+popularDatabase([], [], Quant, []) :-
+    %random_member(NovoNome, Nomes),
+    criaPerdido(NovoNome, "Data", "Dono", "Objeto", "Descricao", "Categoria", P),
+    inserirPerdido(P),
+    criaAchado("Local", "Data", "QuemAchou", "Objeto", "Descricao", "Categoria", A),
+    inserirAchado(A),
+    succ(NewQuant, Quant),
+    popularDatabase(Lista, Lista2, NewQuant, Name).
+
+popularDatabase([], [], 1, []) :-
+    write("Objetos Cadastrados com Sucesso!").
+
+
 %CompareCategoria Perdidos 
 compareCategoria(perdido(Local, Data, Dono, Objeto, Descricao, Elemento), Elemento).
 
@@ -324,6 +356,7 @@ menu(9):-
 menu(10):-
     nl,
     write("Popular Database:"),nl,
+    popularData,
     menu(99).
 
 menu(99) :-
