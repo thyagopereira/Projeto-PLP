@@ -218,6 +218,19 @@ listarQuemAchou([_|T],Elemento):-
     listarQuemAchou(T,Elemento).
 
 
+%Metodo de retono pelo indice:
+getByIndex([],_,_,_):- false.
+getByIndex([H|T],Index, Index , H).
+getByIndex([_|T],Index,Count,Elem):-
+    NewCount is Count + 1,
+getByIndex(T,Index,NewCount,Elem).
+    
+getLocalByIndex(Index, Local) :- locais(Lista), getByIndex(Lista,Index,0,Local).
+getNomeByIndex(Index, Nome) :- nomes(Lista), getByIndex(Lista,Index,0,Nome).
+getDescriByIndex(Index, Descricao) :- descricoes(Lista), getByIndex(Lista,Index,0,Descricao).
+getCatByIndex(Index,Categoria) :- categorias(Lista),getByIndex(Lista,Index,0,Categoria).
+getDataByIndex(Index,Data):- datas(Lista),getByIndex(Lista,Index,0,Data).
+
 %lista de possíveis valores
 nomes(["João", "Maria", "Antonio", "Lucas", "Lara", "Matheus", "Barbara", "Sara", "Carlos", "Vinicius"]).
 locais(["LCC3", "LCC2", "CAA", "CD", "BC", "Biblioteca", "Diretoria", "SPLAB", "REENGE", "Seu Olavo"]).
@@ -227,27 +240,51 @@ datas(["20/01/2019","30/01/2019","15/02/2019","30/05/2019","02/06/2019","19/08/2
 
 %popularData
 popularData :- 
-    nl,
-    write("Digite a quantidade de objetos a serem cadastrados:"),
-    nl , 
-    lerString(Quant), 
-    atom_number(Quant, X),
-    objetosAchados(Lista),
-    objetosPerdidos(Lista2),
-    %nomes(Name)
-    popularDatabase(Lista, Lista2, X, Name).
 
-popularDatabase([], [], Quant, []) :-
-    %random_member(NovoNome, Nomes),
-    criaPerdido(NovoNome, "Data", "Dono", "Objeto", "Descricao", "Categoria", P),
-    inserirPerdido(P),
-    criaAchado("Local", "Data", "QuemAchou", "Objeto", "Descricao", "Categoria", A),
+write("Digite o numero de elementos a serem adicionados: "),
+lerNumero(Quant),
+popularDatabase(Quant,0).
+
+
+popularDatabase(0,_).
+popularDatabase(N,N).
+popularDatabase(N,Count):-
+    random(0,9,R),
+    random(0,9,R1),
+    random(0,9,R2),
+    random(0,9,R3),
+    random(0,9,R4),
+    random(0,9,R5),
+    random(0,9,R6),
+    random(0,9,R7),
+    random(0,9,R8),
+    random(0,9,R9),
+    random(0,9,R10),
+    random(0,9,R11),
+
+
+    getLocalByIndex(R,Local),
+    getDataByIndex(R1,Data),
+    getCatByIndex(R2,Nome),
+    getNomeByIndex(R3,QuemAchou),
+    getDescriByIndex(R4,Descricao),
+    getCatByIndex(R5,Categoria),
+    criaAchado(Local,Data,QuemAchou,Nome,Descricao,Categoria, A),
     inserirAchado(A),
-    succ(NewQuant, Quant),
-    popularDatabase(Lista, Lista2, NewQuant, Name).
 
-popularDatabase([], [], 1, []) :-
-    write("Objetos Cadastrados com Sucesso!").
+    getLocalByIndex(R6,LocalP),
+    getDataByIndex(R7,DataP),
+    getNomeByIndex(R8,Dono),
+    getCatByIndex(R9,Objeto),
+    getDescriByIndex(R10,DescricaoP),
+    getCatByIndex(R11,CategoriaP),
+
+    criaPerdido(LocalP, DataP, Dono, Objeto, DescricaoP, CategoriaP, P),
+    inserirPerdido(P),
+
+     Counter is Count + 1,
+
+    popularDatabase(N,Counter).
 
 
 %CompareCategoria Perdidos 
