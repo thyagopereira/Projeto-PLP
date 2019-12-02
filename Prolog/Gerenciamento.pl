@@ -268,7 +268,7 @@ popularDatabase(N,Count):-
     getCatByIndex(R2,Nome),
     getNomeByIndex(R3,QuemAchou),
     getDescriByIndex(R4,Descricao),
-    getCatByIndex(R5,Categoria),
+    getCatByIndex(R2,Categoria),
     criaAchado(Local,Data,QuemAchou,Nome,Descricao,Categoria, A),
     inserirAchado(A),
 
@@ -277,7 +277,7 @@ popularDatabase(N,Count):-
     getNomeByIndex(R8,Dono),
     getCatByIndex(R9,Objeto),
     getDescriByIndex(R10,DescricaoP),
-    getCatByIndex(R11,CategoriaP),
+    getCatByIndex(R9,CategoriaP),
 
     criaPerdido(LocalP, DataP, Dono, Objeto, DescricaoP, CategoriaP, P),
     inserirPerdido(P),
